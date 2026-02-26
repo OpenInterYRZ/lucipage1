@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
+@theme {
+  /* Text Colors - 文本颜色 */
+  --color-primary: #ffffff;
+  --color-secondary: #adadb0;
+  --color-tertiary: #6b6b70;
+  --color-quaternary: #555558;
+  --color-dim: #4a4a4e;
+
+  /* Background Colors - 背景颜色 */
+  --color-bg: #0a0a0b;
+  --color-surface: #111113;
+  --color-surface-elevated: #141417;
+  --color-surface-hover: #1a1a1d;
+  --color-bg-purple: #1a0b2e;
+
+  /* Brand Colors - 品牌颜色 */
+  --color-brand: #ff5c00;
+  --color-brand-light: #ff8a4c;
+  --color-brand-dim: #ff5c0060;
+
+  /* Accent Colors - 强调颜色 */
+  --color-accent: #785de1;
+  --color-accent-dim: #785de160;
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+
+  /* Border Colors - 边框颜色 */
+  --color-divider: #1f1f23;
+  --color-border: #2a2a2e;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 保留旧的 CSS 变量以保持兼容性 */
+  --color-bg-primary: var(--color-bg);
+  --color-bg-secondary: var(--color-surface);
+  --color-bg-tertiary: var(--color-surface-elevated);
+  --color-bg-quaternary: var(--color-surface-hover);
+
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
+  --color-text-tertiary: var(--color-tertiary);
+  --color-text-quaternary: var(--color-quaternary);
+  --color-text-dim: var(--color-dim);
+
+  --color-brand-primary: var(--color-brand);
+  --color-brand-primary-light: var(--color-brand-light);
+  --color-brand-primary-dim: var(--color-brand-dim);
+
+  --color-accent-purple: var(--color-accent);
+  --color-accent-purple-dim: var(--color-accent-dim);
+  --color-accent-green: var(--color-success);
+  --color-accent-red: var(--color-error);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .font-serif {
+    font-family: "Instrument Serif", serif;
+  }
+
+  .font-sans {
+    font-family: "Inter", sans-serif;
+  }
+
+  .font-mono {
+    font-family: "DM Mono", monospace;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }

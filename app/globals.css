@@ -58,6 +58,7 @@
   html,
   body {
     height: 100%;
+    scroll-behavior: auto !important;
   }
 
   .font-serif {
@@ -76,4 +77,17 @@
 body {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }

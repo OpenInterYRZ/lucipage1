@@ -1,9 +1,44 @@
+"use client";
+
+import { useRef } from "react";
 import Badge from "./Badge";
 import ProductMockup from "./ProductMockup";
 
 export default function HeroSection() {
+  const backgroundRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    if (!backgroundRef.current) return;
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    const maxOffset = 14;
+    const offsetX = x * maxOffset;
+    const offsetY = y * maxOffset;
+
+    backgroundRef.current.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0) scale(1.05)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!backgroundRef.current) return;
+    backgroundRef.current.style.transform = "translate3d(0, 0, 0) scale(1.05)";
+  };
+
   return (
-    <section className="bg-bg w-full flex flex-col items-center gap-[48px] py-[100px] px-[80px]">
+    <section
+      className="bg-bg relative w-full overflow-hidden flex flex-col items-center gap-[48px] py-[100px] px-[80px]"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        ref={backgroundRef}
+        className="absolute inset-0 bg-center bg-cover transition-transform duration-300 ease-out"
+        style={{ backgroundImage: "url('/3.webp')", transform: "scale(1.05)" }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-bg/55 pointer-events-none" aria-hidden="true" />
+      <div className="relative z-10 w-full flex flex-col items-center gap-[48px]">
       {/* Badge */}
       <Badge text="Personal AI Assistant" />
 
@@ -62,6 +97,7 @@ export default function HeroSection() {
         <span className="text-tertiary font-mono text-[13px] font-medium">
           Self-hosted
         </span>
+      </div>
       </div>
     </section>
   );

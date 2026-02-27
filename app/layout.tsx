@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "LUCI - See, Remember & Act",
@@ -19,7 +20,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet" />
       </head>
       <body className="h-full antialiased">
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

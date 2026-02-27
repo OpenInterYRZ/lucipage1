@@ -1,17 +1,17 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import PainPointsSection from "@/components/PainPointsSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import DifferentiatorsSection from "@/components/DifferentiatorsSection";
-import ComparisonSection from "@/components/ComparisonSection";
-import UseCasesSection from "@/components/UseCasesSection";
-import TrustSection from "@/components/TrustSection";
-import FinalCtaSection from "@/components/FinalCtaSection";
-import Footer from "@/components/Footer";
+import Navbar from '@/components/Navbar'
+import HeroSection from '@/components/HeroSection'
+import PainPointsSection from '@/components/PainPointsSection'
+import HowItWorksSection from '@/components/HowItWorksSection'
+import DifferentiatorsSection from '@/components/DifferentiatorsSection'
+import ComparisonSection from '@/components/ComparisonSection'
+import UseCasesSection from '@/components/UseCasesSection'
+import TrustSection from '@/components/TrustSection'
+import FinalCtaSection from '@/components/FinalCtaSection'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <div className="w-full h-full max-w-[1440px] mx-auto">
+    <div className="w-full h-full  mx-auto">
       <Navbar />
       <HeroSection />
 
@@ -45,5 +45,5 @@ export default function Home() {
 
       <Footer />
     </div>
-  );
+  )
 }

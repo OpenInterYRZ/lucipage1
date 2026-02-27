@@ -48,12 +48,21 @@ export default function ProductMockup() {
 
   const content = contentMap[activeNav];
   const navItems: NavItem[] = ['Dashboard', 'Memories', 'Tasks', 'Agents', 'Settings'];
+  const fadeMask = 'linear-gradient(to bottom, rgba(0,0,0,1) 58%, rgba(0,0,0,0) 100%)';
 
   return (
     <div
       className={`bg-surface-elevated rounded-[12px] p-[2px] w-[1100px] h-[580px] flex flex-col transition-all duration-300 ${
         isHovered ? 'scale-[1.02] shadow-2xl shadow-brand/20' : 'scale-100'
       }`}
+      style={{
+        WebkitMaskImage: fadeMask,
+        maskImage: fadeMask,
+        WebkitMaskRepeat: 'no-repeat',
+        maskRepeat: 'no-repeat',
+        WebkitMaskSize: '100% 100%',
+        maskSize: '100% 100%',
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

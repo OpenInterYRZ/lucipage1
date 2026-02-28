@@ -19,7 +19,7 @@ docs/
 # next.js
 /.next/
 /out/
-
+_bmad-output/
 # production
 /build
 

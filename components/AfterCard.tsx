@@ -1,4 +1,4 @@
-import Badge from './Badge';
+import Badge from "./Badge";
 
 interface TaskItemProps {
   dotColor: string;
@@ -10,7 +10,10 @@ interface TaskItemProps {
 function TaskItem({ dotColor, text, badgeColor, badgeText }: TaskItemProps) {
   return (
     <div className="bg-surface-elevated rounded-[8px] p-[10px] px-[12px] flex items-center gap-[10px] w-full">
-      <div className="w-[8px] h-[8px] rounded-full flex-shrink-0" style={{ backgroundColor: dotColor }} />
+      <div
+        className="w-[8px] h-[8px] rounded-full flex-shrink-0"
+        style={{ backgroundColor: dotColor }}
+      />
       <span className="text-secondary font-sans text-[11px] flex-1">
         {text}
       </span>
@@ -18,7 +21,10 @@ function TaskItem({ dotColor, text, badgeColor, badgeText }: TaskItemProps) {
         className="rounded-full py-[3px] px-[8px]"
         style={{ backgroundColor: badgeColor }}
       >
-        <span className="text-[10px] font-sans font-medium" style={{ color: dotColor }}>
+        <span
+          className="text-[10px] font-sans font-medium"
+          style={{ color: dotColor }}
+        >
           {badgeText}
         </span>
       </div>
@@ -29,14 +35,6 @@ function TaskItem({ dotColor, text, badgeColor, badgeText }: TaskItemProps) {
 export default function AfterCard() {
   return (
     <div className="bg-surface rounded-[12px] p-[32px] flex-1 h-[480px] flex flex-col gap-[24px]">
-      {/* Label */}
-      <Badge
-        text="WITH LUCI"
-        dotColor="#22C55E"
-        textColor="#22C55E"
-        bgColor="#22C55E18"
-      />
-
       {/* LUCI Mini Mockup */}
       <div className="bg-bg rounded-[8px] flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}

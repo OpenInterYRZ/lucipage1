@@ -1,14 +1,14 @@
-import Navbar from '@/components/Navbar'
-import HeroSection from '@/components/HeroSection'
-import PainPointsSection from '@/components/PainPointsSection'
-import HowItWorksSection from '@/components/HowItWorksSection'
-import DifferentiatorsSection from '@/components/DifferentiatorsSection'
-import ComparisonSection from '@/components/ComparisonSection'
-import UseCasesSection from '@/components/UseCasesSection'
-import TrustSection from '@/components/TrustSection'
-import CtaBanner from '@/components/CtaBanner'
-import FinalCtaSection from '@/components/FinalCtaSection'
-import Footer from '@/components/Footer'
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import PainPointsSection from "@/components/painpoint/PainPointsSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import LuciSolutionSection from "@/components/LuciSolutionSection";
+import DifferentiatorsSection from "@/components/DifferentiatorsSection";
+import UseCasesSection from "@/components/UseCasesSection";
+import TrustSection from "@/components/TrustSection";
+import CtaBanner from "@/components/CtaBanner";
+import FinalCtaSection from "@/components/FinalCtaSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -26,11 +26,11 @@ export default function Home() {
 
       {/* Section Divider */}
 
-      <DifferentiatorsSection />
+      <LuciSolutionSection />
 
       {/* Section Divider */}
 
-      <ComparisonSection />
+      <DifferentiatorsSection />
 
       {/* Section Divider */}
 
@@ -50,5 +50,5 @@ export default function Home() {
 
       <Footer />
     </div>
-  )
+  );
 }

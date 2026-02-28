@@ -1,17 +1,9 @@
-import Badge from './Badge';
-import ToolWindow from './ToolWindow';
+import Badge from "../Badge";
+import ToolWindow from "../ToolWindow";
 
 export default function BeforeCard() {
   return (
     <div className="bg-surface rounded-[12px] p-[32px] flex-1 h-[480px] flex flex-col gap-[24px]">
-      {/* Label */}
-      <Badge
-        text="WITHOUT LUCI"
-        dotColor="#EF4444"
-        textColor="#EF4444"
-        bgColor="#EF444418"
-      />
-
       {/* Tool Stack - overlapping windows */}
       <div className="flex-1 flex flex-col gap-[-8px] relative">
         {/* Notion */}
@@ -44,13 +36,15 @@ export default function BeforeCard() {
           <div className="flex flex-col gap-[8px] p-[10px] px-[14px]">
             {/* Waveform visual */}
             <div className="flex gap-[3px] items-end h-[40px]">
-              {[12, 20, 8, 16, 24, 14, 18, 10, 22, 16, 12, 20, 8, 16].map((height, i) => (
-                <div
-                  key={i}
-                  className="bg-divider w-[4px] rounded-full"
-                  style={{ height: `${height}px` }}
-                />
-              ))}
+              {[12, 20, 8, 16, 24, 14, 18, 10, 22, 16, 12, 20, 8, 16].map(
+                (height, i) => (
+                  <div
+                    key={i}
+                    className="bg-divider w-[4px] rounded-full"
+                    style={{ height: `${height}px` }}
+                  />
+                ),
+              )}
             </div>
           </div>
         </ToolWindow>

@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
+import Link from "next/link";
 
 export function SreHeroSection() {
   return (
@@ -12,10 +12,16 @@ export function SreHeroSection() {
             {/* Logo and Nav */}
             <div className="flex items-center gap-12">
               <Link href="/" className="flex items-center gap-2">
-                <span className="text-xl font-bold">SRE.ai</span>
+                <span className="text-xl font-bold text-black">LUCI</span>
                 <div className="flex gap-1">
                   {/* Logo symbols - simplified geometric shapes */}
-                  <div className="w-5 h-5 bg-black" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}></div>
+                  <div
+                    className="w-5 h-5 bg-black"
+                    style={{
+                      clipPath:
+                        "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+                    }}
+                  ></div>
                   <div className="w-5 h-5 bg-black rounded-full"></div>
                   <div className="w-5 h-5 bg-black rotate-45"></div>
                 </div>
@@ -23,18 +29,30 @@ export function SreHeroSection() {
 
               {/* Desktop Nav */}
               <nav className="hidden lg:flex items-center gap-8">
-                <button className="text-sm font-medium hover:text-gray-600">Platform</button>
-                <button className="text-sm font-medium hover:text-gray-600">Solutions</button>
-                <button className="text-sm font-medium hover:text-gray-600">Resources</button>
+                <button className="text-sm font-medium hover:text-gray-600 text-black">
+                  Platform
+                </button>
+                <button className="text-sm font-medium hover:text-gray-600 text-black">
+                  Solutions
+                </button>
+                <button className="text-sm font-medium hover:text-gray-600 text-black">
+                  Resources
+                </button>
               </nav>
             </div>
 
             {/* Auth Buttons */}
             <div className="flex items-center gap-4">
-              <Link href="#" className="text-sm font-medium hover:text-gray-600">
+              <Link
+                href="#"
+                className="text-sm font-medium hover:text-gray-600 text-black"
+              >
                 Sign In
               </Link>
-              <Link href="#" className="px-5 py-2.5 bg-black text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors">
+              <Link
+                href="#"
+                className="px-5 py-2.5 bg-black text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
+              >
                 Get Access
               </Link>
             </div>
@@ -48,7 +66,7 @@ export function SreHeroSection() {
           <div className="max-w-[1094px] mx-auto">
             {/* Bordered Header */}
             <div className="border border-black rounded-t-2xl p-8 md:p-12">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-black">
                 Run reliability on autopilot. <br />
                 Free your teams for what&apos;s next.
               </h1>
@@ -67,7 +85,11 @@ export function SreHeroSection() {
               <div className="relative aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
                 <div className="text-center z-10">
                   <div className="w-32 h-32 mx-auto mb-4 bg-black/5 rounded-full flex items-center justify-center">
-                    <svg className="w-16 h-16 text-black/20" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-16 h-16 text-black/20"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
                     </svg>
                   </div>
@@ -79,9 +101,10 @@ export function SreHeroSection() {
 
           {/* Banner - Funding Announcement */}
           <div className="mt-8 max-w-[1094px] mx-auto">
-            <div className="bg-[#D4FF00] border border-black rounded-full px-6 py-4 flex items-center justify-between flex-wrap gap-4">
-              <div className="text-sm font-medium">
-                SRE.ai has raised a $7.2M seed round, led by Salesforce Ventures!
+            <div className="bg-[#fa9807] border border-black rounded-full px-6 py-4 flex items-center justify-between flex-wrap gap-4">
+              <div className="text-sm font-medium text-black">
+                LUCI just released a new feature that allows you to run
+                reliability on autopilot!
               </div>
               <Link
                 href="#"
@@ -94,5 +117,5 @@ export function SreHeroSection() {
         </div>
       </section>
     </>
-  )
+  );
 }

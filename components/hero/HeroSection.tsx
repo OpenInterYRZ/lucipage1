@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Badge from "../Badge";
 import ProductMockup from "../ProductMockup";
+import GradientButton from "../ui/GradientButton";
+import GlassButton from "../ui/GlassButton";
 
 export default function HeroSection() {
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -27,7 +29,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="bg-bg-0 relative w-full overflow-hidden flex flex-col items-center gap-[48px] py-[100px] px-[80px]"
+      className="bg-bg-0 relative w-full overflow-hidden flex flex-col items-center gap-12 py-25 px-20"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -41,17 +43,17 @@ export default function HeroSection() {
         className="absolute inset-0 bg-bg-0/55 pointer-events-none"
         aria-hidden="true"
       />
-      <div className="relative z-10 w-full flex flex-col items-center gap-[48px]">
+      <div className="relative z-10 w-full flex flex-col items-center gap-12">
         {/* Badge */}
         <Badge text="Personal AI Assistant" />
 
         {/* Hero Title */}
-        <h1 className="text-text-0 font-serif text-[72px] tracking-[-1px] text-center">
+        <h1 className="text-text-0 font-serif text-7xl tracking-tight text-center">
           See, Remember & Act
         </h1>
 
         {/* Hero Subtitle */}
-        <p className="text-text-1 font-sans text-[20px] leading-[1.6] text-center max-w-[800px]">
+        <p className="text-text-1 font-sans text-xl leading-relaxed text-center max-w-3xl">
           LUCI remembers everything, then gets things done automatically.
           <br />
           Not just a note-taking tool — it&apos;s a personal AI assistant that
@@ -59,46 +61,32 @@ export default function HeroSection() {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex gap-[16px]">
+        <div className="flex gap-4">
           {/* Primary CTA */}
-          <div className="bg-primary rounded-[8px] py-[14px] px-[32px] flex gap-[8px] hover:bg-primary-hover transition-colors cursor-pointer">
-            <span className="text-white font-sans text-[15px] font-medium">
-              Sign Up for Cloud
-            </span>
-            <span className="text-white font-sans text-[15px] font-medium">
-              →
-            </span>
-          </div>
+          <GradientButton href="/signup" text="Sign Up for Cloud →" />
 
           {/* Secondary CTA */}
-          <div className="rounded-[8px] py-[14px] px-[32px] flex gap-[8px] hover:bg-bg-1 transition-colors cursor-pointer border border-grey-2">
-            <span className="text-text-1 font-sans text-[15px] font-medium">
-              Download Local
-            </span>
-            <span className="text-text-1 font-sans text-[15px] font-medium">
-              ↓
-            </span>
-          </div>
+          <GlassButton href="/download" text="Download Local ↓" />
         </div>
 
         {/* Product Mockup */}
         <ProductMockup />
 
         {/* Trust Row */}
-        <div className="flex items-center justify-center gap-[40px] w-full pt-[40px]">
-          <span className="text-text-3 font-sans text-[12px] font-medium tracking-[0.5px]">
+        <div className="flex items-center justify-center gap-10 w-full pt-10">
+          <span className="text-text-3 font-sans text-xs font-medium tracking-wide">
             Built on open source
           </span>
-          <div className="h-[16px] w-[1px] bg-grey-2" />
-          <span className="text-text-2 font-mono text-[13px] font-medium">
+          <div className="h-4 w-px bg-grey-2" />
+          <span className="text-text-2 font-mono text-xss font-medium">
             OpenClaw
           </span>
-          <div className="h-[16px] w-[1px] bg-grey-2" />
-          <span className="text-text-2 font-mono text-[13px] font-medium">
+          <div className="h-4 w-px bg-grey-2" />
+          <span className="text-text-2 font-mono text-xss font-medium">
             Memories.ai
           </span>
-          <div className="h-[16px] w-[1px] bg-grey-2" />
-          <span className="text-text-2 font-mono text-[13px] font-medium">
+          <div className="h-4 w-px bg-grey-2" />
+          <span className="text-text-2 font-mono text-xss font-medium">
             Self-hosted
           </span>
         </div>

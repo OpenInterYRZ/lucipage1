@@ -10,14 +10,17 @@ import CtaBanner from "@/components/CtaBanner";
 import PillarHero from "@/components/hero/pillarHero";
 import FinalCtaSection from "@/components/CTA/FinalCtaSection";
 import Footer from "@/components/Footer";
+import CtaOne from "@/components/CTA/CtaOne";
+import CapHero from "@/components/hero/caphero";
+import FeatureTabs from "@/components/threeFeature/FeatureTabs";
 
 export default function Home() {
   return (
     <div className="w-full h-full  mx-auto">
       <Navbar />
-      <PillarHero />
+      <CapHero />
       {/* Section Divider */}
-
+      <FeatureTabs />
       <PainPointsSection />
 
       {/* Section Divider */}
@@ -47,7 +50,7 @@ export default function Home() {
       </div>
 
       <FinalCtaSection />
-
+      <CtaOne />
       <Footer />
     </div>
   );

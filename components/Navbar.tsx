@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
+import GradientButton from "./ui/GradientButton";
 
 export default function Navbar() {
   return (
@@ -20,39 +22,31 @@ export default function Navbar() {
         {/* Nav Links */}
         <div className="relative z-10 hidden items-center gap-[26px] md:flex">
           <a
-            href="#features"
+            href="/bird"
             className="text-[#a9a9ae] font-sans text-[13px] tracking-[0.2px] transition-colors hover:text-primary"
           >
-            Features
+            Bird
           </a>
+
           <a
-            href="#how-it-works"
+            href="/sre"
             className="text-[#a9a9ae] font-sans text-[13px] tracking-[0.2px] transition-colors hover:text-primary"
           >
-            How It Works
-          </a>
-          <a
-            href="#compare"
-            className="text-[#a9a9ae] font-sans text-[13px] tracking-[0.2px] transition-colors hover:text-primary"
-          >
-            Compare
+            sre
           </a>
         </div>
 
         {/* Theme Toggle */}
-        <ThemeToggle />
 
         {/* CTA Button */}
-        <button
-          type="button"
-          className="relative z-10 overflow-hidden rounded-[12px] border border-[#ff8448]/45 bg-[linear-gradient(160deg,#171718_0%,#0f0f10_50%,#060607_100%)] px-[18px] py-[9px] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_0_0_1px_rgba(255,120,56,0.2),0_10px_24px_rgba(0,0,0,0.55),0_0_24px_rgba(255,92,0,0.18)] transition-all duration-300 hover:border-[#ffa06f]/60 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_0_0_1px_rgba(255,143,90,0.24),0_12px_28px_rgba(0,0,0,0.6),0_0_32px_rgba(255,92,0,0.24)]"
+        <Link
+          href="/signup"
+          className="bg-gradient-to-r from-[#ff9b26] to-[#ff0c00] rounded-xl py-2 px-4 ml-4 transition-all inline-block"
         >
-          <span
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.18),transparent_35%,transparent_65%,rgba(255,110,46,0.2))]"
-            aria-hidden="true"
-          />
-          <span className="relative text-[13px] font-medium text-[#ffd8c3]">Get Started</span>
-        </button>
+          <span className="text-white font-sans text-base font-bold">
+            Get Started
+          </span>
+        </Link>
       </div>
     </nav>
   );

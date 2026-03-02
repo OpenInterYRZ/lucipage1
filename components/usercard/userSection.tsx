@@ -174,7 +174,7 @@ export default function UserSection() {
     <section className="w-full py-24 overflow-hidden my-30">
       <div className="max-w-3xl mx-auto text-center mb-16 px-6">
         <h2 className="text-text-0 text-3xl font-bold md:text-4xl lg:text-5xl mb-4">
-          Loved by thousands
+          Real people. Real memories.
         </h2>
         <p className="text-text-2 text-base md:text-lg max-w-115 mx-auto">
           See what our users have to say about their experience.

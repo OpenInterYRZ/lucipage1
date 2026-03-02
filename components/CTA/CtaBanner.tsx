@@ -36,8 +36,7 @@ export default function CtaBanner() {
         <div className="flex flex-col justify-center px-10 py-16 lg:px-16 lg:py-20">
           {/* Heading */}
           <h2 className="font-serif text-[clamp(36px,5vw,64px)] leading-[1.05] tracking-[-1.5px] text-white mb-4">
-            Start building something{" "}
-            <span className="italic">truly amazing</span> today
+            Ready to meet LUCI?
           </h2>
 
           {/* Subtext */}

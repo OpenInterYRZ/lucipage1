@@ -17,7 +17,7 @@ export default function FinalCtaSection() {
 
           {/* Title */}
           <h2 className="text-text-0 font-serif text-[64px] tracking-[-2px] text-center">
-            Get Started in 3 Minutes
+            Ready to meet LUCI?
           </h2>
 
           {/* Subtitle */}

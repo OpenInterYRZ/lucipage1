@@ -23,10 +23,12 @@ export default function PainPointsSection() {
     <section className="w-full flex flex-col gap-12 md:gap-14 lg:gap-16 py-16 md:py-20 lg:py-24 px-12 md:px-16 lg:px-20 max-w-[1800px] mx-auto">
       <div className="flex flex-col items-center gap-6">
         <h2 className="text-text-0 text-3xl font-bold md:text-4xl lg:text-5xl text-center">
-          Tired of switching between tools?
+          You&apos;re drowning in info. But starving for insight.
         </h2>
         <p className="text-text-2 text-base md:text-lg text-center">
-          Your day: juggling 5 tools, scattered memory, low efficiency
+          Your calendar is packed. Slack won&apos;t stop. Even when everything
+          is captured, nothing connects. <br />
+          You don&apos;t need another tool. You need understanding.
         </p>
       </div>
 

@@ -35,8 +35,7 @@ export default function CtaBannerImageSection() {
         <div className="flex flex-col justify-center px-10 py-16 lg:px-16 lg:py-20">
           {/* Heading */}
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tighter text-white mb-4">
-            Start building something{" "}
-            <span className="italic">truly amazing</span> today
+            Ready to meet LUCI?
           </h2>
 
           {/* Subtext */}

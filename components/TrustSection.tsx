@@ -22,10 +22,10 @@ export default function TrustSection() {
           bgColor="#22C55E15"
         />
         <h2 className="text-text-0 font-serif text-[48px] tracking-[-1px] text-center">
-          Data & Trust
+          Your data. Your rules. No exceptions.
         </h2>
         <p className="text-text-1 font-sans text-[18px] leading-[1.6] text-center">
-          Enterprise-grade security, full transparency over your data
+          We know what you&apos;re thinking: &quot;An AI that sees everything? What about my data?&quot; Here&apos;s how LUCI is built.
         </p>
       </div>
 

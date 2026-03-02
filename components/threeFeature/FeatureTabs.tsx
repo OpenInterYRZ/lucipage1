@@ -4,25 +4,35 @@ import { motion, AnimatePresence } from "motion/react";
 
 const tabsData = [
   {
-    id: "See",
-    label: "See",
-    title: <>Ask anything, get answers instantly.</>,
+    id: "captures",
+    label: "Captures",
+    title: <>Captures</>,
     description:
-      "Find information across all your apps, summarize long threads, and get up to speed in seconds without digging through files.",
+      "LUCI Pin records your day — meetings, presentations, whiteboard scribbles — from your first coffee to your last email.",
     videoSrc: "/videos/see.mp4",
   },
   {
-    id: "remember",
-    label: "Remember",
-    title: <>Build memory vault from video, extract key insights.</>,
-    description: "Build memory vault from video, extract key insights.",
+    id: "understands",
+    label: "Understands",
+    title: <>Understands</>,
+    description:
+      "LUCI's AI organizes everything into searchable sessions, extracts action items, and builds a growing knowledge base of your world.",
     videoSrc: "/videos/remember.mp4",
   },
   {
-    id: "act",
-    label: "Act",
-    title: <>Auto-invoke Agents to complete tasks.Before you can act</>,
-    description: "Auto-invoke Agents to complete tasks.Before .",
+    id: "analyzes",
+    label: "Analyzes",
+    title: <>Analyzes</>,
+    description:
+      "LUCI doesn't just file it away. It connects patterns across your workflow and your industry, surfacing insights and opportunities aligned with your goals.",
+    videoSrc: "/videos/see.mp4",
+  },
+  {
+    id: "acts",
+    label: "Acts",
+    title: <>Acts</>,
+    description:
+      "LUCI Agent gets to work — plans your day, sends follow-ups, drafts the deck, flags the risks. Like a chief of staff who's read every email and sat in every meeting.",
     videoSrc: "/videos/act.mp4",
   },
 ];

@@ -23,13 +23,10 @@ export const CapHero = () => {
       <div className="relative z-10 flex flex-col items-center text-center w-full max-w-7xl mt-12">
         {/* 标题 & 副标题 */}
         <h1 className="text-text-0 text-7xl font-bold text-center leading-tight mt-12">
-          Your Personal AI Agent Assistant <br /> that can do anything.
+          LUCI sees, understands, and acts.
         </h1>
         <p className="text-text-1 font-sans text-md leading-relaxed text-center max-w-3xl mt-6 mb-12">
-          LUCI remembers everything, then gets things done automatically.
-          <br />
-          it&apos;s a personal AI assistant that builds memory and executes
-          tasks.
+          Meet your professional AI assistant that remembers everything.
         </p>
         <div className="flex gap-4">
           <GradientButton href="/signup" text="Sign Up for Cloud →" />

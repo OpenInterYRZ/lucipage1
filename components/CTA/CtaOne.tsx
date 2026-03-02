@@ -41,7 +41,7 @@ export default function CtaOne() {
         <div className="flex flex-col items-center my-auto gap-6 relative z-10 max-w-3xl">
           {/* Title */}
           <h2 className="text-text-0 font-bold text-6xl tracking-tight text-center">
-            Get Started in 3 Minutes
+            Ready to meet LUCI?
           </h2>
 
           {/* Subtitle */}

@@ -8,35 +8,26 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return (
-      <div className="relative z-10 mr-[12px] h-[36px] w-[36px] rounded-[10px] border border-white/12 bg-white/8" />
-    );
+    return <div className="h-9 w-9 rounded-full border border-grey-1" />;
   }
 
   return (
     <button
       type="button"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="group relative z-10 mr-[12px] h-[36px] w-[36px] overflow-hidden rounded-[10px] border border-white/12 bg-[linear-gradient(160deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-white/20 hover:bg-[linear-gradient(160deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+      className="group flex h-9 w-9 items-center justify-center rounded-full border border-grey-1 text-text-2 transition-all duration-200 hover:border-grey-2 hover:text-text-0 hover:bg-grey-0 dark:hover:bg-grey-1"
       aria-label="Toggle theme"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.12),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        aria-hidden="true"
-      />
-      <div className="relative flex h-full items-center justify-center">
-        {theme === "dark" ? (
-          <Sun className="h-[18px] w-[18px] text-[#ffd8c3] transition-transform duration-300 group-hover:rotate-180 group-hover:scale-110" />
-        ) : (
-          <Moon className="h-[18px] w-[18px] text-[#ffd8c3] transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
-        )}
-      </div>
+      {theme === "dark" ? (
+        <Sun className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+      ) : (
+        <Moon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12" />
+      )}
     </button>
   );
 }

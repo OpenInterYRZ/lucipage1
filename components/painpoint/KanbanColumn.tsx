@@ -24,7 +24,7 @@ export function KanbanColumn({ column }: KanbanColumnProps) {
           style={{ backgroundColor: column.color }}
         />
         <ShinyText text={column.title} />
-        <span className="flex items-center justify-center min-w-[18px] h-[18px] px-1.5 rounded-lg bg-[#333333] text-[10px] font-semibold text-[#999999] font-[Inter,sans-serif]">
+        <span className="flex items-center justify-center min-w-[18px] h-[18px] px-1.5 rounded-lg bg-win-badge-bg text-[10px] font-semibold text-win-badge-text font-[Inter,sans-serif]">
           {column.count}
         </span>
       </div>

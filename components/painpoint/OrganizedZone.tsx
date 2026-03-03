@@ -116,7 +116,7 @@ export function OrganizedZone() {
       <div
         className="absolute top-0 right-0 h-full w-20 pointer-events-none"
         style={{
-          background: "linear-gradient(to right, transparent, #0A0A0F)",
+          background: "linear-gradient(to right, transparent, var(--win-fade-to))",
         }}
       />
     </div>

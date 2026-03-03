@@ -1,211 +1,319 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ThemeToggle } from "./ThemeToggle";
 import { ChevronDown } from "lucide-react";
 
-const productItems = [
-  { href: "/product/luci-pin", label: "LUCI Pin" },
-  { href: "/product/desktop-app", label: "Desktop App" },
-  { href: "/product/mobile-app", label: "Mobile App" },
-];
-
-const useCaseItems = [
-  { href: "/use-cases/marketing", label: "Marketing" },
-  { href: "/use-cases/sales", label: "Sales" },
-  { href: "/use-cases/cross-functional", label: "Cross-functional" },
-];
-
-function Dropdown({
-  label,
-  items,
-}: {
+interface NavItem {
+  href: string;
   label: string;
-  items: { href: string; label: string }[];
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  hasDropdown?: boolean;
+  dropdownColumns?: {
+    title: string;
+    links: { label: string; href: string }[];
+  }[];
+}
+
+const navLinks: NavItem[] = [
+  {
+    href: "/features",
+    label: "Features",
+    hasDropdown: true,
+    dropdownColumns: [
+      {
+        title: "Features",
+        links: [
+          { label: "AI Memory", href: "/features#memory" },
+          { label: "Auto Actions", href: "/features#actions" },
+          { label: "Smart Capture", href: "/features#capture" },
+          { label: "Integrations", href: "/features#integrations" },
+        ],
+      },
+      {
+        title: "Use Cases",
+        links: [
+          { label: "Personal", href: "/use-cases#personal" },
+          { label: "Productivity", href: "/use-cases#productivity" },
+          { label: "Developers", href: "/use-cases#developers" },
+          { label: "Teams", href: "/use-cases#teams" },
+        ],
+      },
+      {
+        title: "Resources",
+        links: [
+          { label: "How-to guides", href: "/faqs" },
+          { label: "Changelog", href: "/company" },
+          { label: "Documentation", href: "/faqs" },
+        ],
+      },
+    ],
+  },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/use-cases", label: "Use Cases" },
+  { href: "/company", label: "Company" },
+  { href: "/faqs", label: "FAQs" },
+];
+
+export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  const isDropdownOpen = openDropdown !== null;
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen(!open)}
-        className="group relative flex items-center gap-1 py-1 font-sans text-[13px] tracking-wide text-white/50 transition-colors duration-200 hover:text-white"
-      >
-        {label}
-        <ChevronDown
-          size={12}
-          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-        />
-        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-[#ff5c00] to-transparent transition-all duration-300 group-hover:w-full" />
-      </button>
+  const handleMouseEnter = useCallback((label: string) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpenDropdown(label);
+  }, []);
 
-      <div
-        className={`absolute left-1/2 top-full mt-3 -translate-x-1/2 min-w-[180px] rounded-xl border border-white/10 bg-black/90 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] transition-all duration-200 ${open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}`}
-      >
-        <div className="flex flex-col gap-0.5 p-1.5">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2 font-sans text-[13px] text-white/60 transition-colors hover:bg-white/8 hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+  const handleMouseLeave = useCallback(() => {
+    timeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
+  }, []);
 
-export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const closeDropdown = useCallback(() => {
+    setOpenDropdown(null);
+  }, []);
 
   return (
-    <nav className="fixed left-1/2 top-4 z-50 w-[min(1120px,calc(100%-24px))] -translate-x-1/2">
-      <div className="relative flex h-[56px] items-center rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] px-4 shadow-[0_18px_50px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:px-5">
-        {/* Glass highlight */}
-        <div
-          className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_18%_0%,rgba(255,255,255,0.15),transparent_50%),radial-gradient(circle_at_92%_120%,rgba(255,92,0,0.1),transparent_42%)]"
-          aria-hidden="true"
-        />
-
-        {/* Logo */}
-        <Link href="/" className="relative z-10 shrink-0">
-          <Image src="/lucilogo.svg" alt="LUCI" width={72} height={28} />
-        </Link>
-
-        {/* Spacer */}
-        <div className="relative z-10 flex-1" />
-
-        {/* Desktop Nav Links */}
-        <div className="relative z-10 hidden items-center gap-7 md:flex">
-          <Dropdown label="Product" items={productItems} />
-          <Dropdown label="Use Cases" items={useCaseItems} />
-          <Link
-            href="/pricing"
-            className="group relative py-1 font-sans text-[13px] tracking-wide text-white/50 transition-colors duration-200 hover:text-white"
-          >
-            Pricing
-            <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-[#ff5c00] to-transparent transition-all duration-300 group-hover:w-full" />
-          </Link>
-          <Link
-            href="/blog"
-            className="group relative py-1 font-sans text-[13px] tracking-wide text-white/50 transition-colors duration-200 hover:text-white"
-          >
-            Blog
-            <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gradient-to-r from-[#ff5c00] to-transparent transition-all duration-300 group-hover:w-full" />
-          </Link>
-        </div>
-
-        {/* Divider */}
-        <div className="relative z-10 mx-4 hidden h-5 w-px bg-white/10 md:block" />
-
-        {/* CTA Button */}
-        <Link
-          href="/download"
-          className="relative z-10 hidden rounded-xl bg-gradient-to-r from-[#ff9b26] to-[#ff0c00] px-4 py-2 transition-all duration-200 hover:scale-[1.04] hover:shadow-[0_0_20px_rgba(255,92,0,0.35)] active:scale-[0.97] md:inline-block"
-        >
-          <span className="font-sans text-sm font-semibold text-white">
-            Get Started
-          </span>
-        </Link>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="relative z-10 ml-2 flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-white/10 md:hidden"
-          aria-label="Toggle menu"
-        >
-          <div className="flex w-4 flex-col items-center gap-[5px]">
-            <span
-              className={`h-px w-full bg-white transition-all duration-300 ${mobileOpen ? "translate-y-[3px] rotate-45" : ""}`}
+    <>
+      <nav
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${isDropdownOpen || scrolled ? "bg-bg-0 border-grey-1" : "bg-transparent border-transparent"}`}
+      >
+        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 lg:px-10">
+          {/* Logo */}
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/lucilogo.svg"
+              alt="LUCI"
+              width={80}
+              height={30}
+              className="dark:invert-0"
             />
-            <span
-              className={`h-px w-full bg-white transition-all duration-300 ${mobileOpen ? "-translate-y-[3px] -rotate-45" : ""}`}
-            />
+          </Link>
+
+          {/* Desktop Nav Links — center */}
+          <div className="hidden items-center gap-1 md:flex">
+            {navLinks.map((link) =>
+              link.hasDropdown ? (
+                <div
+                  key={link.href}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter(link.label)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link
+                    href={link.href}
+                    className="group flex items-center gap-1 rounded-md px-3.5 py-2 text-[14px] font-medium text-text-1 transition-colors duration-150 hover:text-text-0"
+                  >
+                    {link.label}
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 text-text-2 transition-transform duration-300 ${openDropdown === link.label ? "rotate-180" : ""}`}
+                    />
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="group flex items-center gap-1 rounded-md px-3.5 py-2 text-[14px] font-medium text-text-1 transition-colors duration-150 hover:text-text-0"
+                  onMouseEnter={closeDropdown}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
-        </button>
-      </div>
 
-      {/* Mobile Dropdown */}
-      <div
-        className={`mt-2 overflow-hidden rounded-2xl border border-white/10 bg-black/80 backdrop-blur-2xl transition-all duration-300 md:hidden ${mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 border-transparent"}`}
-      >
-        <div className="flex flex-col gap-1 p-3">
-          {/* Product */}
-          <p className="px-3 pt-2 pb-1 font-sans text-[11px] font-medium uppercase tracking-wider text-white/30">
-            Product
-          </p>
-          {productItems.map((item) => (
+          {/* Right Side Actions */}
+          <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
             <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-3 py-2.5 font-sans text-sm text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+              href="/"
+              className="rounded-[10px] bg-nav-btn1 px-5 py-2 text-[13px] font-semibold text-text-0 transition-colors duration-150 hover:bg-nav-btn1-hover"
             >
-              {item.label}
+              Try online
             </Link>
-          ))}
-
-          <div className="my-1 h-px bg-white/10" />
-
-          {/* Use Cases */}
-          <p className="px-3 pt-2 pb-1 font-sans text-[11px] font-medium uppercase tracking-wider text-white/30">
-            Use Cases
-          </p>
-          {useCaseItems.map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-3 py-2.5 font-sans text-sm text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+              href="/download"
+              className="rounded-[10px] bg-nav-btn2 px-5 py-2 text-[13px] font-semibold text-bg-0 transition-colors duration-150 hover:bg-nav-btn2-hover"
             >
-              {item.label}
+              Download
             </Link>
-          ))}
+          </div>
 
-          <div className="my-1 h-px bg-white/10" />
-
-          <Link
-            href="/pricing"
-            onClick={() => setMobileOpen(false)}
-            className="rounded-lg px-3 py-2.5 font-sans text-sm text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="relative z-10 flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-grey-0 md:hidden"
+            aria-label="Toggle menu"
           >
-            Pricing
-          </Link>
-          <Link
-            href="/blog"
-            onClick={() => setMobileOpen(false)}
-            className="rounded-lg px-3 py-2.5 font-sans text-sm text-white/60 transition-colors hover:bg-white/5 hover:text-white"
-          >
-            Blog
-          </Link>
-
-          <div className="my-1 h-px bg-white/10" />
-
-          <Link
-            href="/download"
-            onClick={() => setMobileOpen(false)}
-            className="rounded-lg bg-gradient-to-r from-[#ff9b26] to-[#ff0c00] px-3 py-2.5 text-center font-sans text-sm font-semibold text-white"
-          >
-            Get Started
-          </Link>
+            <div className="flex w-4 flex-col items-center gap-[5px]">
+              <span
+                className={`h-[1.5px] w-full bg-text-0 transition-all duration-300 ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`}
+              />
+              <span
+                className={`h-[1.5px] w-full bg-text-0 transition-all duration-300 ${mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+              />
+            </div>
+          </button>
         </div>
-      </div>
-    </nav>
+
+        {/* ===== Desktop Mega Dropdown — full width, always mounted ===== */}
+        {navLinks
+          .filter((l) => l.hasDropdown && l.dropdownColumns)
+          .map((link) => {
+            const isOpen = openDropdown === link.label;
+            return (
+              <div
+                key={link.label}
+                className={`absolute left-0 right-0 top-full overflow-hidden border-b transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hidden md:block ${isOpen ? "max-h-[400px] opacity-100 border-grey-1 pointer-events-auto" : "max-h-0 opacity-0 border-transparent pointer-events-none"}`}
+                onMouseEnter={() => handleMouseEnter(link.label)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div
+                  className={`bg-bg-0 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? "translate-y-0" : "-translate-y-4"}`}
+                >
+                  <div className="mx-auto flex max-w-[1400px] gap-16 px-6 py-10 lg:px-10">
+                    {link.dropdownColumns!.map((col, colIdx) => (
+                      <div key={col.title} className="min-w-[180px]">
+                        <p className="mb-4 text-[12px] font-semibold uppercase tracking-wider text-text-3">
+                          {col.title}
+                        </p>
+                        <div className="flex flex-col gap-1">
+                          {col.links.map((item, itemIdx) => (
+                            <Link
+                              key={item.href + item.label}
+                              href={item.href}
+                              className="rounded-lg px-3 py-2 text-[14px] text-text-1 transition-all duration-200 hover:bg-grey-0 hover:text-text-0"
+                              style={{
+                                transitionDelay: isOpen
+                                  ? `${colIdx * 50 + itemIdx * 30}ms`
+                                  : "0ms",
+                                opacity: isOpen ? 1 : 0,
+                                transform: isOpen
+                                  ? "translateY(0)"
+                                  : "translateY(-8px)",
+                              }}
+                              onClick={closeDropdown}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                          <Link
+                            href={link.href}
+                            className="mt-2 px-3 text-[13px] font-medium text-primary transition-colors hover:underline"
+                            style={{
+                              transitionDelay: isOpen
+                                ? `${colIdx * 50 + col.links.length * 30}ms`
+                                : "0ms",
+                              opacity: isOpen ? 1 : 0,
+                            }}
+                            onClick={closeDropdown}
+                          >
+                            View all →
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+        {/* ===== Mobile Dropdown ===== */}
+        <div
+          className={`overflow-hidden border-t bg-bg-0/60 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${mobileOpen ? "max-h-[600px] opacity-100 border-grey-1" : "max-h-0 opacity-0 border-transparent"}`}
+        >
+          <div className="flex flex-col gap-1 px-6 py-4">
+            {navLinks.map((link, i) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-[14px] text-text-1 transition-all duration-200 hover:bg-grey-0 hover:text-text-0"
+                style={{
+                  transitionDelay: mobileOpen ? `${i * 40}ms` : "0ms",
+                  opacity: mobileOpen ? 1 : 0,
+                  transform: mobileOpen ? "translateX(0)" : "translateX(-12px)",
+                }}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="my-2 h-px bg-grey-1" />
+
+            <div
+              className="flex items-center gap-3 transition-all duration-200"
+              style={{
+                transitionDelay: mobileOpen
+                  ? `${navLinks.length * 40 + 40}ms`
+                  : "0ms",
+                opacity: mobileOpen ? 1 : 0,
+                transform: mobileOpen ? "translateY(0)" : "translateY(8px)",
+              }}
+            >
+              <Link
+                href="/"
+                className="flex-1 rounded-2xl  bg-nav-btn1 py-2.5 text-center text-[13px] font-semibold text-text-0 transition-colors hover:bg-nav-btn1-hover"
+              >
+                Try online
+              </Link>
+              <Link
+                href="/download"
+                className="flex-1 rounded-2xl  bg-nav-btn2 py-2.5 text-center text-[13px] font-semibold text-bg-0 transition-colors hover:bg-nav-btn2-hover"
+              >
+                Download
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* ===== Full-screen backdrop — desktop dropdown & mobile menu ===== */}
+      <div
+        className={`fixed inset-0 z-40 bg-bg-0/40 backdrop-blur-md transition-all duration-300 ${isDropdownOpen || mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        style={{ top: "64px" }}
+        onClick={() => {
+          setOpenDropdown(null);
+          setMobileOpen(false);
+        }}
+        aria-hidden
+      />
+
+    </>
   );
 }

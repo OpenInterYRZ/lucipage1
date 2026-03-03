@@ -23,21 +23,20 @@ export function TaskCard({ task, columnColor, opacity = 1 }: TaskCardProps) {
   if (task.done) {
     return (
       <div
-        className="rounded-lg p-3.5 flex flex-col gap-2"
+        className="rounded-lg p-3.5 flex flex-col gap-2 bg-win-card-bg"
         style={{
-          backgroundColor: "#16161A",
           border: `1px solid ${columnColor}33`,
           opacity,
         }}
       >
         <div className="flex items-center gap-2">
           <CircleCheck className="w-3.5 h-3.5 shrink-0" style={{ color: columnColor }} />
-          <span className="text-xs font-medium text-[#999999] font-[Inter,sans-serif]">
+          <span className="text-xs font-medium text-win-card-text-muted font-[Inter,sans-serif]">
             {task.title}
           </span>
         </div>
         {task.completedDate && (
-          <span className="text-[10px] text-[#555555] font-[Inter,sans-serif]">
+          <span className="text-[10px] text-win-body-text-3 font-[Inter,sans-serif]">
             {task.completedDate}
           </span>
         )}
@@ -48,10 +47,9 @@ export function TaskCard({ task, columnColor, opacity = 1 }: TaskCardProps) {
   /* Regular / In-progress card */
   return (
     <div
-      className="rounded-lg p-3.5 flex flex-col gap-2"
+      className="rounded-lg p-3.5 flex flex-col gap-2 bg-win-card-bg"
       style={{
-        backgroundColor: "#16161A",
-        border: `1px solid ${task.progress != null ? columnColor + "44" : "#2A2A2A"}`,
+        border: `1px solid ${task.progress != null ? columnColor + "44" : "var(--win-card-border)"}`,
       }}
     >
       {/* Tag */}
@@ -65,13 +63,13 @@ export function TaskCard({ task, columnColor, opacity = 1 }: TaskCardProps) {
       )}
 
       {/* Title */}
-      <span className="text-xs font-medium text-[#E0E0E0] font-[Inter,sans-serif] leading-snug">
+      <span className="text-xs font-medium text-win-card-text font-[Inter,sans-serif] leading-snug">
         {task.title}
       </span>
 
       {/* Progress bar */}
       {task.progress != null && (
-        <div className="w-full h-1 rounded-sm bg-[#2A2A2A] overflow-hidden">
+        <div className="w-full h-1 rounded-sm bg-win-progress-track overflow-hidden">
           <div
             className="h-full rounded-sm"
             style={{
@@ -86,16 +84,16 @@ export function TaskCard({ task, columnColor, opacity = 1 }: TaskCardProps) {
       <div className="flex items-center gap-1.5">
         {task.assignee && (
           <div className="flex items-center gap-1.5">
-            <User className="w-[11px] h-[11px] text-[#666666]" />
-            <span className="text-[10px] text-[#888888] font-[Inter,sans-serif]">
+            <User className="w-[11px] h-[11px] text-win-card-text-dim" />
+            <span className="text-[10px] text-win-card-text-muted font-[Inter,sans-serif]">
               {task.assignee}
             </span>
           </div>
         )}
         {task.date && (
           <div className="flex items-center gap-1.5">
-            <Calendar className="w-[11px] h-[11px] text-[#666666]" />
-            <span className="text-[10px] text-[#666666] font-[Inter,sans-serif]">
+            <Calendar className="w-[11px] h-[11px] text-win-card-text-dim" />
+            <span className="text-[10px] text-win-card-text-dim font-[Inter,sans-serif]">
               {task.date}
             </span>
           </div>

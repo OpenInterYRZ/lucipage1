@@ -59,7 +59,7 @@ export default function ProductMockup() {
 
   return (
     <div
-      className={`bg-bg-1 rounded-xl p-0.5 w-full max-w-275 h-80 md:h-128 lg:h-145 flex flex-col transition-all duration-300 `}
+      className={`bg-bg-1 rounded-xl p-0.5 w-full max-w-275 h-80 md:h-128 lg:h-145 flex flex-col transition-all duration-300 border border-grey-1 `}
       style={{
         WebkitMaskImage: fadeMask,
         maskImage: fadeMask,
@@ -83,7 +83,7 @@ export default function ProductMockup() {
         {/* App Content */}
         <div className="flex h-full overflow-hidden">
           {/* Sidebar */}
-          <div className="bg-bg-0 w-48 md:w-52 lg:w-55 h-full flex flex-col gap-3 py-5 px-4">
+          <div className="bg-grey-0 w-48 md:w-52 lg:w-55 h-full flex flex-col gap-3 py-5 px-4">
             <div className="text-brand-5 font-mono text-sm font-semibold tracking-wider mb-2">
               LUCI
             </div>
@@ -119,7 +119,7 @@ export default function ProductMockup() {
                 {Array.from({ length: content.cardCount || 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="bg-bg-1 rounded-lg flex-1 h-25 transition-all duration-300 hover:bg-bg-2"
+                    className="bg-grey-0 rounded-lg flex-1 h-25 transition-all duration-300 hover:bg-bg-2"
                     style={{
                       animation: `fadeInUp 0.3s ease-out ${i * 0.1}s both`,
                     }}
@@ -130,7 +130,7 @@ export default function ProductMockup() {
 
             {/* Task Section */}
             <div
-              className="bg-bg-1 rounded-xl flex-1 p-4 transition-all duration-300"
+              className="bg-grey-0 rounded-xl flex-1 p-4 transition-all duration-300"
               style={{
                 animation: "fadeInUp 0.4s ease-out 0.3s both",
               }}

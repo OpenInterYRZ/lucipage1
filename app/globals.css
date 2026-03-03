@@ -13,7 +13,7 @@
   --bg-1: #ffffff;
   --bg-2: #ffffff;
   --bg-3: #ffffff;
-  --web-bg-0: #9582a9;
+  --web-bg-0: #ffffff;
   --text-0: rgba(32, 31, 38, 1);
   --text-1: rgba(32, 31, 38, 0.8);
   --text-2: rgba(32, 31, 38, 0.6);
@@ -39,12 +39,54 @@
   --grey-8: #32313b;
   --grey-9: #201f26;
   --disabled-fill: rgba(50, 49, 59, 0.04);
+  --nav-btn1: #EEF1F5;
+  --nav-btn1-hover: #E7EAF0;
+  --nav-btn2: #262626;
+  --nav-btn2-hover: #000000;
   --free: #027c3f;
   --plus: #ff7b00;
   --pro: #984be6;
   --enterprise: #0075ae;
   --gradient-orange: #ff9a3c;
   --gradient-red: #ff2c36;
+
+  /* PainPoint window tokens — light mode */
+  --win-bg: #F5F5F7;
+  --win-border: #D1D1D6;
+  --win-titlebar: #E8E8ED;
+  --win-title-text: #86868B;
+  --win-placeholder-1: #D1D1D6;
+  --win-placeholder-2: #DCDCE0;
+  --win-body-text-1: #6E6E73;
+  --win-body-text-2: #86868B;
+  --win-body-text-3: #AEAEB2;
+  --win-body-text-bright: #3A3A3C;
+  --win-card-bg: #FFFFFF;
+  --win-card-border: #E5E5EA;
+  --win-card-text: #1D1D1F;
+  --win-card-text-muted: #6E6E73;
+  --win-card-text-dim: #AEAEB2;
+  --win-progress-track: #E5E5EA;
+  --win-badge-bg: #E8E8ED;
+  --win-badge-text: #86868B;
+  --win-fade-to: #FFFFFF;
+
+  /* Hero 四角渐变色 — 每个角一团颜色，中间留白 */
+  --grad-tl: rgba(200, 160, 255, 0.45);
+  --grad-tr: rgba(255, 200, 170, 0.40);
+  --grad-bl: rgba(255, 180, 210, 0.35);
+  --grad-br: rgba(180, 200, 255, 0.35);
+  /* Features section gradient colors */
+  --grad-feat-purple: rgba(168, 85, 247, 0.12);
+  --grad-feat-orange: rgba(255, 92, 0, 0.10);
+  --grad-feat-top: #FBF5FF;
+  --grad-feat-mid: #FFFFFF;
+  --grad-feat-bottom: #FFF8F5;
+  /* CTA section gradient colors */
+  --grad-cta-orange: rgba(255, 92, 0, 0.15);
+  --grad-cta-purple: rgba(168, 85, 247, 0.10);
+  --grad-cta-dark-top: #1A1714;
+  --grad-cta-dark-bottom: #2E2117;
 
   --toaster-width: 25rem;
   --background: oklch(1 0 0);
@@ -116,6 +158,45 @@
   --grey-8: #e7e7ea;
   --grey-9: #f9f9f9;
   --disabled-fill: rgba(231, 231, 234, 0.04);
+  --nav-btn1: #303030;
+  --nav-btn1-hover: #222222;
+  --nav-btn2: #F7F7F7;
+  --nav-btn2-hover: #FFFFFF;
+
+  /* PainPoint window tokens — dark mode */
+  --win-bg: #1E1E1E;
+  --win-border: #333333;
+  --win-titlebar: #2A2A2A;
+  --win-title-text: #888888;
+  --win-placeholder-1: #333333;
+  --win-placeholder-2: #2D2D2D;
+  --win-body-text-1: #999999;
+  --win-body-text-2: #777777;
+  --win-body-text-3: #555555;
+  --win-body-text-bright: #CCCCCC;
+  --win-card-bg: #16161A;
+  --win-card-border: #2A2A2A;
+  --win-card-text: #E0E0E0;
+  --win-card-text-muted: #888888;
+  --win-card-text-dim: #666666;
+  --win-progress-track: #2A2A2A;
+  --win-badge-bg: #333333;
+  --win-badge-text: #999999;
+  --win-fade-to: #0A0A0F;
+
+  --grad-tl: rgba(200, 160, 255, 0.10);
+  --grad-tr: rgba(255, 200, 170, 0.08);
+  --grad-bl: rgba(255, 180, 210, 0.06);
+  --grad-br: rgba(180, 200, 255, 0.06);
+  --grad-feat-purple: rgba(168, 85, 247, 0.05);
+  --grad-feat-orange: rgba(255, 92, 0, 0.04);
+  --grad-feat-top: #1a1820;
+  --grad-feat-mid: #16161a;
+  --grad-feat-bottom: #1a1815;
+  --grad-cta-orange: rgba(255, 92, 0, 0.10);
+  --grad-cta-purple: rgba(168, 85, 247, 0.06);
+  --grad-cta-dark-top: #0d0b08;
+  --grad-cta-dark-bottom: #1a1510;
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -184,12 +265,48 @@
   --color-grey-8: var(--grey-8);
   --color-grey-9: var(--grey-9);
   --color-disabled-fill: var(--disabled-fill);
+  --color-nav-btn1: var(--nav-btn1);
+  --color-nav-btn1-hover: var(--nav-btn1-hover);
+  --color-nav-btn2: var(--nav-btn2);
+  --color-nav-btn2-hover: var(--nav-btn2-hover);
   --color-free: var(--free);
   --color-plus: var(--plus);
   --color-pro: var(--pro);
   --color-enterprise: var(--enterprise);
   --color-gradient-orange: var(--gradient-orange);
   --color-gradient-red: var(--gradient-red);
+  --color-grad-tl: var(--grad-tl);
+  --color-grad-tr: var(--grad-tr);
+  --color-grad-bl: var(--grad-bl);
+  --color-grad-br: var(--grad-br);
+  --color-grad-feat-purple: var(--grad-feat-purple);
+  --color-grad-feat-orange: var(--grad-feat-orange);
+  --color-grad-feat-top: var(--grad-feat-top);
+  --color-grad-feat-mid: var(--grad-feat-mid);
+  --color-grad-feat-bottom: var(--grad-feat-bottom);
+  --color-grad-cta-orange: var(--grad-cta-orange);
+  --color-grad-cta-purple: var(--grad-cta-purple);
+  --color-grad-cta-dark-top: var(--grad-cta-dark-top);
+  --color-grad-cta-dark-bottom: var(--grad-cta-dark-bottom);
+  --color-win-bg: var(--win-bg);
+  --color-win-border: var(--win-border);
+  --color-win-titlebar: var(--win-titlebar);
+  --color-win-title-text: var(--win-title-text);
+  --color-win-placeholder-1: var(--win-placeholder-1);
+  --color-win-placeholder-2: var(--win-placeholder-2);
+  --color-win-body-text-1: var(--win-body-text-1);
+  --color-win-body-text-2: var(--win-body-text-2);
+  --color-win-body-text-3: var(--win-body-text-3);
+  --color-win-body-text-bright: var(--win-body-text-bright);
+  --color-win-card-bg: var(--win-card-bg);
+  --color-win-card-border: var(--win-card-border);
+  --color-win-card-text: var(--win-card-text);
+  --color-win-card-text-muted: var(--win-card-text-muted);
+  --color-win-card-text-dim: var(--win-card-text-dim);
+  --color-win-progress-track: var(--win-progress-track);
+  --color-win-badge-bg: var(--win-badge-bg);
+  --color-win-badge-text: var(--win-badge-text);
+  --color-win-fade-to: var(--win-fade-to);
   --color-background: var(--bg-0);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -223,7 +340,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
   --text-xss: 0.625rem;
   --text-2_5xl: 1.75rem;
 

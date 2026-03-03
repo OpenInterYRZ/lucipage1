@@ -3,22 +3,37 @@ import { Download } from "lucide-react";
 import GradientButton from "../ui/GradientButton";
 import GlassButton from "../ui/GlassButton";
 import ProductMockup from "../ProductMockup";
-
+import { HeroGradientBg } from "../gradient/GradientBg";
 export const CapHero = () => {
   return (
-    <div className="relative min-h-screen bg-bg-0 flex flex-col items-center pt-24 pb-16 px-4 overflow-hidden font-sans">
-      {/* 背景图片 */}
+    // <HeroGradientBg>
+    <div className="relative min-h-screen flex flex-col items-center pt-24 pb-16 px-4 overflow-hidden font-sans">
+      {/* 背景视频 */}
+      {/* <div className="absolute inset-0 w-full h-full z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-60"
+        >
+          <source src="/videos/bak2.mp4" type="video/mp4" />
+        </video>
+      </div> */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
+          src="/q.png"
+          alt="hero-bg"
+          className="w-full h-full object-cover dark:hidden"
+        />
+        <img
           src="/backk.webp"
-          alt="Background"
-          className="w-full h-full object-cover opacity-60"
+          alt="hero-bg"
+          className="w-full h-full object-cover hidden dark:block"
         />
       </div>
-
       {/* 渐变叠加层 */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#08050c]/80 via-[#08050c]/30 to-[#08050c]/90 pointer-events-none"></div>
-
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-bg-0 via-bg-0/30 to-bg-0/90 pointer-events-none"></div>
       {/* 主要内容区 */}
       <div className="relative z-10 flex flex-col items-center text-center w-full max-w-7xl mt-12">
         {/* 标题 & 副标题 */}
@@ -73,7 +88,10 @@ export const CapHero = () => {
           </span>
         </div>
       </div>
+      {/* 底部模糊渐变过渡 */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent via-bg-0/60 to-bg-0 pointer-events-none" />
     </div>
+    // </HeroGradientBg>
   );
 };
 

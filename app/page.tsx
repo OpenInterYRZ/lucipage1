@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/hero/HeroSection";
 import PainPointsSection from "@/components/painpoint/PainPointsSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
@@ -20,17 +19,19 @@ import UserSection from "@/components/usercard/userSection";
 import PricingSection from "@/components/pricing/PricingSection";
 import FAQSection from "@/components/FAQ/FAQSection";
 import { VideoText } from "@/components/ui/video-text";
+import KeyFeaturesBento from "@/components/bento/KeyFeaturesBento";
+import AccordionFeatures from "@/components/features/AccordionFeatures";
 export default function Home() {
   return (
     <div className="w-full h-full  mx-auto">
-      <Navbar />
       <CapHero />
       {/* Section Divider */}
-      <FeatureTabs />
       <PainPointsSection />
-
+      <AccordionFeatures />
       {/* Section Divider */}
       <BentoFeatures />
+      <KeyFeaturesBento />
+
       <UseCaseSectionMasonry />
       {/* Section Divider */}
 

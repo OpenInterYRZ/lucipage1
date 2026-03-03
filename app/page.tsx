@@ -38,8 +38,6 @@ export default function Home() {
       <PricingSection />
       <FAQSection />
       <CtaBanner />
-      <CtaBannerImageSection />
-      <CtaOne />
       <Footer />
     </div>
   );

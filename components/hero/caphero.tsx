@@ -4,7 +4,7 @@ import React from "react";
 import { motion, type Variants } from "framer-motion";
 import GradientButton from "../ui/GradientButton";
 import GlassButton from "../ui/GlassButton";
-import ProductMockup from "../ProductMockup";
+import DashboardMock from "../DashboardMock";
 
 const container = {
   hidden: {},
@@ -89,7 +89,7 @@ export const CapHero = () => {
 
         {/* 5. 产品截图 */}
         <motion.div variants={fadeIn}>
-          <ProductMockup />
+          <DashboardMock />
         </motion.div>
 
         {/* 6. 底部合作 Logos */}

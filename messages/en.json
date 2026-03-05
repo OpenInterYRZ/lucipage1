@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "LUCI - See, Remember & Act",
+    "description": "LUCI remembers everything and gets things done automatically. Not just a recording tool — a personal AI assistant that builds memory and automates execution."
+  },
+  "nav": {
+    "features": "Features",
+    "useCases": "Use Cases",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "getStarted": "Get Started",
+    "signIn": "Sign In"
+  }
+}

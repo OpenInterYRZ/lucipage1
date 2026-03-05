@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "LUCI - 보고, 기억하고, 실행하다",
+    "description": "LUCI는 모든 것을 기억하고 자동으로 작업을 수행합니다. 단순한 녹화 도구가 아닌, 기억을 구축하고 실행을 자동화하는 개인 AI 어시스턴트입니다."
+  },
+  "nav": {
+    "features": "기능",
+    "useCases": "사용 사례",
+    "pricing": "가격",
+    "faq": "자주 묻는 질문",
+    "getStarted": "시작하기",
+    "signIn": "로그인"
+  }
+}

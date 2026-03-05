@@ -6,6 +6,7 @@ import {routing} from '@/i18n/routing';
 import {ThemeProvider} from '@/components/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import SmoothScroll from '@/components/SmoothScroll';
+import {ChatWidget} from '@/components/chatbot/ChatWidget';
 
 type Props = {
   children: React.ReactNode;
@@ -63,6 +64,7 @@ export default async function LocaleLayout({children, params}: Props) {
           >
             <Navbar />
             <SmoothScroll>{children}</SmoothScroll>
+            <ChatWidget />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

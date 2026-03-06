@@ -7,6 +7,7 @@ import UseCaseSectionMasonry from "@/components/usecase/UseCaseSectionMasonry";
 import UserSection from "@/components/usercard/userSection";
 import PricingSection from "@/components/pricing/PricingSection";
 import FAQSection from "@/components/FAQ/FAQSection";
+import ConnectorsSection from "@/components/connectors/ConnectorsSection";
 import KeyFeaturesBento from "@/components/bento/KeyFeaturesBento";
 import AccordionFeatures from "@/components/features/AccordionFeatures";
 import FeaturesTimeline from "@/components/features/FeaturesTimeline";
@@ -25,6 +26,7 @@ export default function Home() {
       <UserSection />
       <PricingSection />
       <FAQSection />
+      <ConnectorsSection />
       <CtaBanner />
       <Footer />
     </div>

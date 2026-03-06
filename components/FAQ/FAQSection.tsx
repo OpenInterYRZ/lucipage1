@@ -2,94 +2,102 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "How is LUCI different from regular AI assistants?",
-    a: "LUCI doesn't just answer questions — it remembers your preferences, tracks your tasks, and integrates information across apps. While typical AI starts from scratch every conversation, LUCI continuously learns how you work and becomes a truly personalized assistant.",
-  },
-  {
     q: "Is my data secure?",
-    a: "Absolutely. All data is end-to-end encrypted in transit and at rest. We never use your data for model training or share it with third parties. You can export or delete all your data at any time.",
+    a: "Cloud version: encrypted storage, isolated VMs, full data separation.\nLocal version: all data stays on your disk — nothing is ever uploaded.",
   },
   {
-    q: "What integrations are supported?",
-    a: "We currently support 40+ tools including Notion, Google Workspace, Slack, GitHub, Figma, and Linear. New integrations are added monthly, and you can connect any service via our API.",
+    q: "Is it hard to get started?",
+    a: "Not at all. Install the app, sign in, and LUCI starts working immediately. No configuration needed — it learns your workflow as you go.",
   },
   {
-    q: "What's the difference between Free and Pro?",
-    a: "The Free plan includes core AI conversations and basic task management. Pro unlocks unlimited integrations, advanced memory, priority response times, and team collaboration. Enterprise adds private deployment and custom solutions.",
+    q: "What platforms are supported?",
+    a: "LUCI runs on macOS, Windows, and Linux. Mobile apps for iOS and Android are on the roadmap. You can also access LUCI via Telegram and WhatsApp.",
   },
   {
-    q: "Can I use LUCI offline?",
-    a: "Core AI features require an internet connection, but local caching lets you view previous conversations, notes, and task lists while offline. Everything syncs automatically when you reconnect.",
+    q: "Will my data be used to train models?",
+    a: "Never. Your data is yours alone. We do not use any user data for model training, and our open-source codebase lets you verify this yourself.",
+  },
+  {
+    q: "How long of a video can it handle?",
+    a: "LUCI can process videos up to 4 hours long. It chunks and indexes the content so you can search, summarize, and extract action items from any segment.",
   },
   {
     q: "How do I cancel my subscription?",
-    a: 'Head to Settings and click "Manage Subscription" to cancel anytime — no need to contact support. After cancellation, your account downgrades to Free at the end of the current billing cycle. All your data is preserved.',
+    a: 'Head to Settings → Subscription and click "Cancel Plan." No need to contact support. Your account downgrades to Free at the end of the billing cycle and all data is preserved.',
+  },
+  {
+    q: "Is there technical support?",
+    a: "Yes. Free users get community support via Discord. Pro and Enterprise plans include priority email support with guaranteed response times.",
   },
 ];
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number>(0);
 
-  const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
+  const toggle = (i: number) => setOpenIndex(openIndex === i ? -1 : i);
 
   return (
-    <section className="relative w-full py-24 md:py-32">
-      {/* Subtle radial glow behind the section */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,92,0,0.06) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-3xl px-6">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-primary">
-            FAQ
-          </p>
-          <h2 className="text-[clamp(32px,5vw,52px)] font-bold leading-[1.1] tracking-tight text-text-0">
-            Frequently Asked Questions
+    <section
+      className="w-full"
+      style={{ backgroundColor: "#FAFAF8" }}
+    >
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-12 px-6 py-16 md:flex-row md:gap-[100px] md:px-[100px] md:py-24">
+        {/* Left — Title Column */}
+        <div className="flex shrink-0 flex-col gap-4 md:w-[400px]">
+          <h2
+            className="text-[36px] font-medium leading-[1.15] tracking-tight md:text-[52px]"
+            style={{ color: "#1A1A1A", fontFamily: "var(--font-sans)" }}
+          >
+            Frequently
+            <br />
+            Asked
+            <br />
+            Questions.
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-text-0/50">
-            Everything you need to know about LUCI
+          <p
+            className="max-w-[360px] text-[15px] leading-relaxed md:text-base"
+            style={{ color: "#8C8780" }}
+          >
+            Everything you need to know about Luci
           </p>
         </div>
 
-        {/* Accordion */}
-        <div className="divide-y divide-white/[0.08]">
+        {/* Right — Accordion */}
+        <div className="min-w-0 flex-1">
+          {/* Top divider */}
+          <div className="h-px w-full" style={{ backgroundColor: "#E5E2DD" }} />
+
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
               <div key={i}>
                 <button
                   onClick={() => toggle(i)}
-                  className="group flex w-full items-center justify-between gap-4 py-6 text-left transition-colors duration-200"
+                  className="group flex w-full items-center justify-between gap-4 py-5 text-left"
                 >
                   <span
-                    className={`text-lg font-medium leading-snug transition-colors duration-200 ${
-                      isOpen ? "text-primary" : "text-text-0"
-                    }`}
+                    className="text-base font-medium leading-snug transition-colors duration-200"
+                    style={{ color: "#1A1A1A" }}
                   >
                     {faq.q}
                   </span>
-                  <motion.span
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
-                    className="flex-shrink-0"
-                  >
-                    <ChevronDown
-                      size={20}
-                      className={`transition-colors duration-200 ${
-                        isOpen ? "text-primary" : "text-text-0/40"
-                      }`}
-                    />
-                  </motion.span>
+                  <span className="flex size-5 shrink-0 items-center justify-center">
+                    <motion.div
+                      initial={false}
+                      animate={{ rotate: isOpen ? 90 : 0 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                    >
+                      {isOpen ? (
+                        <Minus size={20} style={{ color: "#E8600A" }} />
+                      ) : (
+                        <Plus size={20} style={{ color: "#E8600A" }} />
+                      )}
+                    </motion.div>
+                  </span>
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -98,15 +106,27 @@ export default function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{
+                        height: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+                        opacity: { duration: 0.2, delay: 0.05 },
+                      }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-[15px] leading-[1.7] text-text-0/55">
+                      <p
+                        className="whitespace-pre-line pb-4 text-sm leading-[1.6]"
+                        style={{ color: "#6B6560" }}
+                      >
                         {faq.a}
                       </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {/* Divider */}
+                <div
+                  className="h-px w-full"
+                  style={{ backgroundColor: "#E5E2DD" }}
+                />
               </div>
             );
           })}

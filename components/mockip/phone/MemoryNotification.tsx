@@ -1,0 +1,72 @@
+"use client";
+
+import { Gem, ChevronDown } from "lucide-react";
+
+interface MemoryNotificationProps {
+  title?: string;
+  body?: string;
+  collapsed?: boolean;
+}
+
+export function MemoryNotification({
+  title = "Memory update",
+  body = "I believe that at this stage, while AI-assisted development has reduced repetitive CRUD work, frequent context switching has significantly increased cognitive load.",
+  collapsed = false,
+}: MemoryNotificationProps) {
+  if (collapsed) {
+    return (
+      <div
+        className="flex w-full items-center gap-1.5 rounded-2xl px-[18px] py-3"
+        style={{
+          background: "#FFFFFF",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          fontFamily: "Manrope, sans-serif",
+        }}
+      >
+        <Gem size={16} className="text-[#4A6CF7]" />
+        <span className="text-lg font-bold text-[#1A1A2E]">{title}</span>
+        <div className="flex-1" />
+        <ChevronDown size={16} className="rotate-[-90deg] text-[#AAAAAA]" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="flex w-full flex-col gap-3 rounded-2xl p-[16px_18px]"
+      style={{
+        background: "#FFFFFF",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        fontFamily: "Manrope, sans-serif",
+      }}
+    >
+      {/* Top row */}
+      <div className="flex w-full items-center gap-1.5">
+        <Gem size={16} className="text-[#4A6CF7]" />
+        <span className="text-lg font-bold text-[#1A1A2E]">{title}</span>
+        <div className="flex-1" />
+        <ChevronDown size={16} className="text-[#AAAAAA]" />
+      </div>
+
+      {/* Body */}
+      <p className="text-lg font-normal leading-[1.5] text-[#4A6CF7]">{body}</p>
+
+      {/* Buttons */}
+      <div className="flex w-full gap-2.5">
+        <button className="flex h-9 flex-1 items-center justify-center rounded-lg border border-[#E0E0E8] bg-white text-lg font-semibold tracking-[0.5px] text-[#666666]">
+          UNDO
+        </button>
+        <button className="flex h-9 flex-1 items-center justify-center rounded-lg border border-[#E0E0E8] bg-white text-lg font-semibold tracking-[0.5px] text-[#666666]">
+          ACCEPT
+        </button>
+      </div>
+
+      {/* View link */}
+      <div className="flex w-full justify-center">
+        <span className="text-lg font-medium text-[#4A6CF7]">
+          View Memories
+        </span>
+      </div>
+    </div>
+  );
+}

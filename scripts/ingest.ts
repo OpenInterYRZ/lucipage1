@@ -3,7 +3,7 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { OpenAI } from "openai";
 import * as fs from "fs";
 import * as path from "path";
-import pdf from "pdf-parse";
+import { PDFParse } from "pdf-parse";
 
 const DOCUMENTS_DIR = path.join(process.cwd(), "data", "documents");
 const VECTOR_STORE_DIR = path.join(process.cwd(), "data", "vectorstore");
@@ -26,8 +26,11 @@ async function loadDocument(
 
   if (ext === ".pdf") {
     const buffer = fs.readFileSync(filePath);
-    const data = await pdf(buffer);
-    return { content: data.text, source };
+    const parser = new PDFParse({ data: new Uint8Array(buffer) });
+    const data = await parser.getText();
+    const text = data.pages.map((p) => p.text).join("\n");
+    await parser.destroy();
+    return { content: text, source };
   }
 
   if (ext === ".md" || ext === ".txt") {

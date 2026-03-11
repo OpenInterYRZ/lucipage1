@@ -1,0 +1,37 @@
+---
+title: "How LUCI's Memory Architecture Works Under the Hood"
+description: "A deep dive into the knowledge graph and vector store that power LUCI's persistent memory system."
+date: "2025-02-10"
+author: "LUCI Team"
+tags: ["engineering", "architecture", "ai"]
+image: "/blog/neural-network.png"
+published: true
+---
+
+## Why Memory Matters
+
+Most AI assistants forget everything the moment you close the window. LUCI takes a fundamentally different approach — every interaction builds on the last.
+
+## The Knowledge Graph
+
+At the core of LUCI's memory is a **hybrid knowledge graph** that combines structured relationships with vector embeddings.
+
+### Entity Extraction
+
+When LUCI observes your workflow, it doesn't just store raw text. It extracts entities — people, projects, documents, decisions — and maps the relationships between them.
+
+### Temporal Indexing
+
+Every memory is timestamped and indexed along multiple dimensions. This means you can query by time, by topic, or by relationship.
+
+## Vector Store Integration
+
+For semantic search, LUCI uses a high-performance vector store that enables natural language queries across your entire history.
+
+## Privacy First
+
+All memory processing happens locally on your device. Your data never leaves your machine unless you explicitly choose to sync it.
+
+## What's Next
+
+We're working on **collaborative memory** — allowing teams to share context while maintaining individual privacy boundaries.

@@ -346,6 +346,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-serif: "DM Serif Display", ui-serif, Georgia, serif;
   --text-xss: 0.625rem;
   --text-2_5xl: 1.75rem;
 

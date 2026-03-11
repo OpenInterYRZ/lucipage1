@@ -1,12 +1,13 @@
 import type {MetadataRoute} from 'next';
 import {routing} from '@/i18n/routing';
+import {getAllSlugs} from '@/lib/blog';
 
 const baseUrl = 'https://luci.com';
 
 const pages = ['', '/gradient-demo', '/light-demo', '/sre'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.flatMap((page) =>
+  const pageEntries = pages.flatMap((page) =>
     routing.locales.map((locale) => ({
       url: `${baseUrl}/${locale}${page}`,
       lastModified: new Date(),
@@ -17,4 +18,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     }))
   );
+
+  // Blog listing pages
+  const blogListingEntries = routing.locales.map((locale) => ({
+    url: `${baseUrl}/${locale}/blog`,
+    lastModified: new Date(),
+    alternates: {
+      languages: Object.fromEntries(
+        routing.locales.map((l) => [l, `${baseUrl}/${l}/blog`])
+      ),
+    },
+  }));
+
+  // Individual blog post pages
+  const slugs = getAllSlugs();
+  const blogPostEntries = slugs.flatMap((slug) =>
+    routing.locales.map((locale) => ({
+      url: `${baseUrl}/${locale}/blog/${slug}`,
+      lastModified: new Date(),
+      alternates: {
+        languages: Object.fromEntries(
+          routing.locales.map((l) => [l, `${baseUrl}/${l}/blog/${slug}`])
+        ),
+      },
+    }))
+  );
+
+  return [...pageEntries, ...blogListingEntries, ...blogPostEntries];
 }

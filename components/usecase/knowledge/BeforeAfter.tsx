@@ -12,17 +12,17 @@ const milestones = [
     labelY: -44,
     cards: [
       {
-        title: "Video Review Time",
-        value: 5,
+        title: "Research Time",
+        value: 6,
         suffix: "+ hrs/week",
-        desc: "Team members manually scrub hours of footage to find one quote or decision. Critical moments are buried in recordings nobody rewatches.",
+        desc: "Knowledge workers manually re-watch lectures, webinars, and interviews to find key insights. Important details are buried in hours of content.",
       },
       {
-        title: "Knowledge Retention",
-        value: 15,
+        title: "Information Recall",
+        value: 10,
         prefix: "~",
         suffix: "%",
-        desc: "Insights disappear the moment a meeting ends. When someone leaves, their context walks out the door with them.",
+        desc: "Crucial details from videos, tutorials, and talks are forgotten within days. Notes are incomplete and scattered across tools.",
       },
     ],
   },
@@ -35,18 +35,18 @@ const milestones = [
     labelY: -48,
     cards: [
       {
-        title: "Video Review Time",
-        value: 85,
+        title: "Research Time",
+        value: 90,
         prefix: "-",
         suffix: "%",
-        desc: "AI-powered search finds any moment instantly. Hours of scrubbing replaced by a single query across all visual and spoken content.",
+        desc: "AI-powered search finds any moment instantly. Ask a question and get answers from across all your videos, lectures, and recordings.",
       },
       {
-        title: "Knowledge Retention",
-        value: 3,
+        title: "Information Recall",
+        value: 5,
         prefix: "+",
         suffix: "x",
-        desc: "Every meeting, decision, and insight automatically indexed and connected. Nothing is lost when people leave or projects change.",
+        desc: "Every video, webinar, and tutorial is automatically summarized, indexed, and linked. Your personal knowledge base grows with every piece of content.",
       },
     ],
   },
@@ -100,9 +100,9 @@ export default function BeforeAfter() {
         >
           <div className="absolute top-8 left-8 md:top-12 md:left-12 z-10">
             <h3 className="text-[22px] md:text-[32px] font-semibold leading-[1.2] text-[#1A1A2E] max-w-[340px]">
-              Transform Your Team&apos;s
+              Supercharge Your
               <br />
-              Operational Efficiency
+              Research Workflow
             </h3>
           </div>
 

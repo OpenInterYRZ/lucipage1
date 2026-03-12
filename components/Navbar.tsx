@@ -291,12 +291,7 @@ export default function Navbar() {
         {/* Right Side Actions — absolute */}
         <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 items-center gap-3 md:flex">
           <ThemeToggle />
-          <Link
-            href="/"
-            className="rounded-[10px] bg-nav-btn1 px-5 py-2 text-[13px] font-semibold text-text-0 transition-colors duration-150 hover:bg-nav-btn1-hover"
-          >
-            Try online
-          </Link>
+
           <Link
             href="/download"
             className="rounded-[10px] bg-nav-btn2 px-5 py-2 text-[13px] font-semibold text-bg-0 transition-colors duration-150 hover:bg-nav-btn2-hover"
@@ -525,12 +520,6 @@ export default function Navbar() {
               transform: mobileOpen ? "translateY(0)" : "translateY(8px)",
             }}
           >
-            <Link
-              href="/"
-              className="flex-1 rounded-2xl bg-nav-btn1 py-2.5 text-center text-[13px] font-semibold text-text-0 transition-colors hover:bg-nav-btn1-hover"
-            >
-              Try online
-            </Link>
             <Link
               href="/download"
               className="flex-1 rounded-2xl bg-nav-btn2 py-2.5 text-center text-[13px] font-semibold text-bg-0 transition-colors hover:bg-nav-btn2-hover"

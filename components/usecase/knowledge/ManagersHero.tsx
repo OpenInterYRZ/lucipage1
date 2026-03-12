@@ -8,18 +8,18 @@ export default function ManagersHero() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-grey-1 bg-grey-0 px-4 py-1.5 text-[12px] font-medium text-text-2">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              LUCI for Managers
+              LUCI for Knowledge Workers
             </span>
           </div>
 
           <h1 className="mt-6 text-[40px] md:text-[56px] font-semibold leading-[1.08] tracking-tight text-text-0 max-w-3xl">
-            Transform Video Chaos Into
-            <br />a Searchable Knowledge Base
+            Never Lose a Detail —
+            <br />Your AI-Powered Second Brain
           </h1>
 
           <p className="mt-5 text-base md:text-lg leading-relaxed text-text-2 max-w-[600px]">
-            Stop wasting hours sifting through footage. LUCI automates video
-            understanding, so your team can focus on insights, not playback.
+            Researchers, analysts, and writers — LUCI captures, organizes, and
+            recalls everything you&apos;ve seen, so you can focus on thinking, not searching.
           </p>
 
           <div className="mt-8 flex gap-3">
@@ -38,7 +38,7 @@ export default function ManagersHero() {
           </div>
           <img
             src="/usecase-manage/mana.webp"
-            alt="Managers Hero"
+            alt="Knowledge Workers Hero"
             className="w-full h-full object-cover mt-10"
           />
           <div className="mt-12 flex flex-col items-center gap-2 text-text-2">

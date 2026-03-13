@@ -291,7 +291,12 @@ export default function Navbar() {
         {/* Right Side Actions — absolute */}
         <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 items-center gap-3 md:flex">
           {/* <ThemeToggle /> */}
-
+          <Link
+            href="/download"
+            className="rounded-[10px] bg-nav-btn2 px-5 py-2 text-[13px] font-semibold text-bg-0 transition-colors duration-150 hover:bg-nav-btn2-hover"
+          >
+            Contact sales
+          </Link>
           <Link
             href="/download"
             className="rounded-[10px] bg-nav-btn2 px-5 py-2 text-[13px] font-semibold text-bg-0 transition-colors duration-150 hover:bg-nav-btn2-hover"

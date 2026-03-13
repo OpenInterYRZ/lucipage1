@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ChatWidget } from "@/components/chatbot/ChatWidget";
 import Script from "next/script";
-
+import { Analytics } from "@vercel/analytics/next";
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;

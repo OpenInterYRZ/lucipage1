@@ -130,7 +130,7 @@ const resourceItems: NavItemData[] = [
 
 const aboutItems: NavItemData[] = [
   { label: "About Us", href: "/about" },
-  { label: "Careers", href: "/about/careers" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/about/contact" },
   { label: "Open Source", href: "https://github.com", external: true },
 ];

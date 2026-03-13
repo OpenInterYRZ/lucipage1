@@ -8,36 +8,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutVideoHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
+  const videoWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const overlay = overlayRef.current;
-    if (!section || !overlay) return;
+    const videoWrap = videoWrapRef.current;
+    if (!section || !videoWrap) return;
 
     const ctx = gsap.context(() => {
-      // Darken the hero as user scrolls
-      gsap.to(overlay, {
-        opacity: 0.7,
-        ease: "none",
+      // Phase 1: Video shrinks from fullscreen to content size with rounded corners
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "bottom top",
+          end: "bottom bottom",
           scrub: true,
+          pin: videoWrap,
         },
       });
 
-      // Slight scale-up for parallax depth feel
-      gsap.to(".about-hero-bg", {
-        scale: 1.1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
+      tl.to(videoWrap, {
+        scale: 0.45,
+        borderRadius: "2rem",
+        ease: "power2.inOut",
       });
     }, section);
 
@@ -45,18 +38,20 @@ export default function AboutVideoHero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-screen">
-      {/* Fixed hero that stays behind */}
-      <div className="fixed inset-0 w-full h-screen overflow-hidden -z-10">
-        <img
-          src="/night.webp"
-          alt=""
-          className="about-hero-bg w-full h-full object-cover will-change-transform"
-        />
-        {/* Dark overlay that increases on scroll */}
-        <div
-          ref={overlayRef}
-          className="absolute inset-0 bg-black opacity-0 pointer-events-none"
+    <section ref={sectionRef} className="relative h-[200vh]">
+      {/* Video container — pinned during scroll, shrinks from fullscreen */}
+      <div
+        ref={videoWrapRef}
+        className="w-screen h-screen overflow-hidden will-change-transform"
+        style={{ transformOrigin: "center center" }}
+      >
+        <video
+          src="/videos/bounty.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
         />
       </div>
     </section>

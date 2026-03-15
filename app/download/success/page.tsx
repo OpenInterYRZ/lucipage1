@@ -3,84 +3,103 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { CheckCircle2, RotateCcw } from "lucide-react";
 
 function BrowserMockup() {
-  const [showComplete, setShowComplete] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const showComplete = progress >= 100;
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowComplete(true), 1200);
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        // Accelerate towards the end
+        const step = p < 60 ? 4 : p < 90 ? 2 : 1;
+        return Math.min(p + step, 100);
+      });
+    }, 30);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full max-w-[420px]">
+    <div className="w-full max-w-[400px]">
       {/* Browser window */}
-      <div className="rounded-xl border border-grey-1 bg-bg-0 shadow-lg overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="rounded-xl border border-grey-1 bg-bg-0 shadow-lg overflow-hidden"
+      >
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-grey-1 bg-grey-0">
+        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-grey-1 bg-grey-0">
           <div className="flex gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-            <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-            <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
           </div>
           <div className="flex-1 flex justify-center">
             <div className="bg-grey-1 rounded-md px-4 py-1 text-[11px] text-text-2 font-medium">
-              luci.com/setup
+              download
             </div>
           </div>
-          {/* Download icon */}
-          <svg
-            className="w-4 h-4 text-text-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"
-            />
-          </svg>
         </div>
 
         {/* Download bar */}
         <div className="px-4 py-3">
           <div className="flex items-center gap-3 rounded-lg border border-grey-1 bg-grey-0 px-3 py-2.5">
             {/* DMG icon */}
-            <div className="w-8 h-8 rounded-lg bg-grey-1 flex items-center justify-center shrink-0">
-              <svg
-                className="w-4 h-4 text-text-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                />
-              </svg>
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center shrink-0 shadow-sm">
+              <span className="text-white text-[10px] font-bold">.dmg</span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[13px] font-medium text-text-0 truncate">
                 LUCI.dmg
               </p>
+              {/* Progress bar */}
+              <div className="mt-1.5 h-1 rounded-full bg-grey-1 overflow-hidden">
+                <motion.div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${progress}%`,
+                    background: showComplete
+                      ? "#28c840"
+                      : "linear-gradient(90deg, #FF8C00, #FFa030)",
+                  }}
+                  transition={{ duration: 0.1 }}
+                />
+              </div>
               <p
-                className={`text-[11px] font-medium transition-colors duration-500 ${showComplete ? "text-[#28c840]" : "text-text-2"}`}
+                className={`mt-1 text-[11px] font-medium transition-colors duration-300 ${showComplete ? "text-[#28c840]" : "text-text-2"}`}
               >
-                {showComplete ? "Download Complete" : "Downloading..."}
+                {showComplete ? "Download complete" : `${progress}%`}
               </p>
             </div>
+            {showComplete && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              >
+                <CheckCircle2 size={18} className="text-[#28c840] shrink-0" />
+              </motion.div>
+            )}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Installer window — offset below */}
-      <div className="mt-4 ml-8 rounded-xl border border-grey-1 bg-bg-0 shadow-lg overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: showComplete ? 1 : 0, y: showComplete ? 0 : 20 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="mt-3 ml-8 rounded-xl border border-grey-1 bg-bg-0 shadow-lg overflow-hidden"
+      >
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-grey-1 bg-grey-0">
+        <div className="flex items-center gap-2 px-4 py-2 border-b border-grey-1 bg-grey-0">
           <div className="flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
             <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
@@ -92,8 +111,8 @@ function BrowserMockup() {
         </div>
 
         {/* Installer content */}
-        <div className="flex items-center justify-center gap-6 px-8 py-10">
-          {/* App icon placeholder */}
+        <div className="flex items-center justify-center gap-6 px-8 py-8">
+          {/* App icon */}
           <div className="w-14 h-14 rounded-2xl bg-grey-1 flex items-center justify-center shadow-sm">
             <Image
               src="/lucilogo-black.svg"
@@ -142,7 +161,7 @@ function BrowserMockup() {
             </span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -163,7 +182,7 @@ export default function DownloadSuccessPage() {
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-20 py-20">
         <div className="max-w-[460px]">
           {/* Logo */}
-          <Link href="/" className="inline-block mb-16">
+          <Link href="/" className="inline-block mb-14">
             <Image
               src="/lucilogo-black.svg"
               alt="LUCI"
@@ -181,69 +200,81 @@ export default function DownloadSuccessPage() {
           </Link>
 
           {/* Heading */}
-          <h1 className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.1] text-text-0 tracking-tight">
-            Open LUCI
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.1] text-text-0 tracking-tight"
+          >
+            Install LUCI
             <br />
-            in 3 steps:
-          </h1>
+            <span className="text-text-2">in 3 steps</span>
+          </motion.h1>
 
           {/* Steps */}
-          <div className="mt-10 flex flex-col gap-6">
-            <Step num="01" text="Open your Downloads folder" />
-            <Step num="02" text="Double-click LUCI.dmg" />
-            <Step
-              num="03"
-              text="Wait for the window to open — then drag to install"
-            />
-          </div>
-
-          {/* Retry */}
-          <div className="mt-10 pt-6 border-t border-grey-1">
-            <p className="text-[13px] text-text-2">
-              Download didn&apos;t start?{" "}
-              <button
-                onClick={handleRetry}
-                className="text-text-0 font-medium underline underline-offset-2 hover:opacity-70 transition-opacity cursor-pointer"
+          <div className="mt-10 flex flex-col gap-0">
+            {[
+              { num: "1", text: "Open your Downloads folder" },
+              { num: "2", text: "Double-click LUCI.dmg" },
+              { num: "3", text: "Drag LUCI into Applications" },
+            ].map((step, i) => (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.2 + i * 0.1 }}
               >
-                Try again
-              </button>{" "}
-              <span className="inline-block ml-0.5 text-text-2">&#x21bb;</span>
-            </p>
+                <Step num={step.num} text={step.text} />
+              </motion.div>
+            ))}
           </div>
 
-          {/* Platform note */}
-          <div className="mt-4">
+          {/* Retry + Platform */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
+            className="mt-10 pt-6 border-t border-grey-1 flex items-center justify-between flex-wrap gap-3"
+          >
+            <button
+              onClick={handleRetry}
+              className="inline-flex items-center gap-1.5 text-[13px] text-text-2 font-medium hover:text-text-0 transition-colors cursor-pointer"
+            >
+              <RotateCcw size={13} />
+              Download didn&apos;t start? Try again
+            </button>
             <p className="text-[13px] text-text-2">
-              Currently available for{" "}
-              <span className="text-text-0 font-medium">Mac Silicon</span> only.
+              <span className="text-text-0 font-medium">Mac Silicon</span> only
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Right column — visual */}
       <div className="hidden lg:flex flex-1 items-center justify-center bg-grey-0 relative overflow-hidden">
-        {/* Subtle decorative gradient */}
-        <div className="absolute inset-0 opacity-30">
-          <div
-            className="absolute top-1/4 -right-20 w-80 h-80 rounded-full blur-[100px]"
-            style={{ background: "var(--text-2)" }}
-          />
-          <div
-            className="absolute bottom-1/4 -left-20 w-60 h-60 rounded-full blur-[80px]"
-            style={{ background: "var(--text-2)" }}
-          />
-        </div>
+        {/* Subtle radial glow */}
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            background:
+              "radial-gradient(ellipse at 60% 40%, #FF8C00 0%, transparent 60%)",
+          }}
+        />
 
         <div className="relative z-10 flex flex-col items-center gap-8 px-8">
-          <div className="text-center mb-4">
-            <p className="text-[15px] text-text-2 mb-1">
-              Complete setup to claim your
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-2"
+          >
+            <p className="text-[13px] text-text-2 mb-1.5 uppercase tracking-wider font-medium">
+              Complete setup to claim
             </p>
-            <p className="text-[clamp(1.25rem,2.5vw,1.75rem)] font-semibold text-text-0 underline underline-offset-4 decoration-2">
-              1100 free credits Today
+            <p className="text-[clamp(1.5rem,2.5vw,2rem)] font-bold text-text-0">
+              3 days of free trial
             </p>
-          </div>
+          </motion.div>
 
           <BrowserMockup />
         </div>
@@ -254,11 +285,11 @@ export default function DownloadSuccessPage() {
 
 function Step({ num, text }: { num: string; text: string }) {
   return (
-    <div className="flex items-baseline gap-5">
-      <span className="text-[13px] tabular-nums text-text-2 font-medium shrink-0">
+    <div className="flex items-center gap-4 py-4 border-b border-grey-1 last:border-b-0">
+      <span className="w-8 h-8 rounded-full bg-orange-400/10 flex items-center justify-center text-[13px] font-semibold text-orange-500 shrink-0">
         {num}
       </span>
-      <p className="text-[clamp(1rem,2vw,1.25rem)] font-medium text-text-0 leading-snug">
+      <p className="text-[clamp(0.938rem,2vw,1.125rem)] font-medium text-text-0 leading-snug">
         {text}
       </p>
     </div>

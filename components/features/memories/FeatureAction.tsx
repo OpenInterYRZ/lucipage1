@@ -13,7 +13,7 @@ export default function FeatureAction() {
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-20 md:grid-cols-2 md:gap-20 md:py-16">
       {/* Visual — left */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl p-5 md:p-6">
         <Image
           src="/landscape/lan10.webp"
           alt=""
@@ -21,7 +21,7 @@ export default function FeatureAction() {
           className="object-cover"
         />
 
-        <div className="relative z-10 m-5 md:m-6 overflow-hidden rounded-2xl bg-white shadow-lg">
+        <div className="relative z-10 w-full max-w-full overflow-hidden rounded-2xl bg-white shadow-lg">
           <div className="p-5">
             {/* Meeting title */}
             <h4 className="text-base font-semibold text-neutral-900">
@@ -48,11 +48,11 @@ export default function FeatureAction() {
       </div>
 
       {/* Text — right */}
-      <div>
+      <div className="flex flex-col items-center text-center">
         <h2 className="text-xl font-medium md:text-4xl lg:text-5xl">
           Proactive reminders at the moments that matter
         </h2>
-        <p className="mt-5 max-w-lg text-base leading-relaxed text-text-1 md:text-lg">
+        <p className="mt-5 max-w-lg text-center text-base leading-relaxed text-text-1 md:text-lg">
           Before a meeting starts, LUCI surfaces relevant memories, past
           discussions, and key context — so you can switch gears instantly
           instead of scrambling to catch up.

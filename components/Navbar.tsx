@@ -206,6 +206,78 @@ export default function Navbar() {
 
   const closeDropdown = () => setActiveDropdown(null);
 
+  const renderDropdownContent = (key: string) => {
+    switch (key) {
+      case "usecases":
+        return (
+          <div className="flex flex-col gap-0.5">
+            {useCasePersonas.map((item) => (
+              <IconLink key={item.href} item={item} />
+            ))}
+          </div>
+        );
+      case "features":
+        return (
+          <div className="flex flex-col gap-0.5">
+            {coreFeatures.map((item) => (
+              <IconLink key={item.href} item={item} />
+            ))}
+          </div>
+        );
+      case "resources":
+        return (
+          <div className="flex flex-col gap-0.5 py-1">
+            {resourceItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeDropdown}
+                className="flex items-center gap-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-grey-0"
+              >
+                {item.icon && (
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-grey-1 bg-grey-0 text-text-2">
+                    {item.icon}
+                  </span>
+                )}
+                <span className="text-[14px] font-medium text-text-0">
+                  {item.label}
+                </span>
+                {item.badge && (
+                  <span className="rounded-full border border-grey-1 bg-grey-0 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-text-2">
+                    {item.badge}
+                  </span>
+                )}
+              </Link>
+            ))}
+          </div>
+        );
+      case "about":
+        return (
+          <div className="flex flex-col gap-0.5 py-1">
+            {aboutItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeDropdown}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-2 rounded-lg px-3 py-2.5 transition-colors duration-150 hover:bg-grey-0"
+              >
+                <span className="text-[14px] font-medium text-text-0">
+                  {item.label}
+                </span>
+                {item.external && (
+                  <ExternalLink className="h-3.5 w-3.5 text-text-2" />
+                )}
+              </Link>
+            ))}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   /* ── Shared icon-link component (with description) ── */
   const IconLink = ({ item }: { item: NavItemData }) => (
     <Link
@@ -286,18 +358,34 @@ export default function Navbar() {
                   {item.label}
                 </Link>
               ) : (
-                <button
-                  key={item.key}
-                  onMouseEnter={() => openDropdown(item.key)}
-                  onMouseLeave={scheduleClose}
-                  className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
-                    activeDropdown === item.key
-                      ? "bg-grey-1 text-text-0"
-                      : "text-text-1 hover:text-text-0"
-                  }`}
-                >
-                  {item.label}
-                </button>
+                <div key={item.key} className="relative">
+                  <button
+                    onMouseEnter={() => openDropdown(item.key)}
+                    onMouseLeave={scheduleClose}
+                    className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
+                      activeDropdown === item.key
+                        ? "bg-grey-1 text-text-0"
+                        : "text-text-1 hover:text-text-0"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+
+                  {/* Dropdown */}
+                  <div
+                    onMouseEnter={() => openDropdown(item.key)}
+                    onMouseLeave={scheduleClose}
+                    className={`absolute left-1/2 -translate-x-1/2 top-full pt-2 ${dropdownWidth[item.key] || "w-[320px]"} transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      activeDropdown === item.key
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 -translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    <div className="rounded-2xl border border-grey-1 bg-web-bg-0 p-6 shadow-2xl">
+                      {renderDropdownContent(item.key)}
+                    </div>
+                  </div>
+                </div>
               ),
             )}
           </div>
@@ -337,105 +425,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ===== Mega Dropdowns ===== */}
-      {navItems.map((nav) => (
-        <div
-          key={nav.key}
-          onMouseEnter={() => openDropdown(nav.key)}
-          onMouseLeave={scheduleClose}
-          className={`absolute left-1/2 -translate-x-1/2 ${dropdownWidth[nav.key]} transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hidden md:block ${
-            activeDropdown === nav.key
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-2 pointer-events-none"
-          }`}
-        >
-          <div className="rounded-2xl border border-grey-1 bg-web-bg-0 p-6 shadow-2xl">
-            {/* ── Use Cases ── */}
-            {nav.key === "usecases" && (
-              <div className="flex flex-col gap-0.5">
-                {useCasePersonas.map((item) => (
-                  <IconLink key={item.href} item={item} />
-                ))}
-              </div>
-            )}
-
-            {/* ── Features ── */}
-            {nav.key === "features" && (
-              <>
-                <div className="flex flex-col gap-0.5">
-                  <h3 className="mb-3 text-[13px] font-medium tracking-wide text-text-2">
-                    Core Capabilities
-                  </h3>
-                  {coreFeatures.map((item) => (
-                    <IconLink key={item.href} item={item} />
-                  ))}
-                </div>
-                <div className="mt-5 flex gap-4">
-                  <Link
-                    href="/features"
-                    onClick={closeDropdown}
-                    className="flex-1 rounded-xl border border-grey-1 py-2.5 text-center text-[13px] font-medium text-text-0 transition-colors duration-150 hover:bg-grey-0"
-                  >
-                    All features
-                  </Link>
-                </div>
-              </>
-            )}
-
-            {/* ── Resources ── */}
-            {nav.key === "resources" && (
-              <div className="flex flex-col gap-0.5 py-1">
-                {resourceItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={closeDropdown}
-                    className="flex items-center gap-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-grey-0"
-                  >
-                    {item.icon && (
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-grey-1 bg-grey-0 text-text-2">
-                        {item.icon}
-                      </span>
-                    )}
-                    <span className="text-[14px] font-medium text-text-0">
-                      {item.label}
-                    </span>
-                    {item.badge && (
-                      <span className="rounded-full border border-grey-1 bg-grey-0 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-text-2">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            )}
-
-            {/* ── About ── */}
-            {nav.key === "about" && (
-              <div className="flex flex-col gap-0.5 py-1">
-                {aboutItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={closeDropdown}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-2 rounded-lg px-3 py-2.5 transition-colors duration-150 hover:bg-grey-0"
-                    >
-                      <span className="text-[14px] font-medium text-text-0">
-                        {item.label}
-                      </span>
-                      {item.external && (
-                        <ExternalLink className="h-3.5 w-3.5 text-text-2" />
-                      )}
-                    </Link>
-                  ))}
-                </div>
-            )}
-          </div>
-        </div>
-      ))}
-
       {/* ===== Mobile Dropdown ===== */}
       <div
         className={`overflow-hidden border-t bg-bg-0/60 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${mobileOpen ? "max-h-[600px] opacity-100 border-grey-1" : "max-h-0 opacity-0 border-transparent"}`}
@@ -444,7 +433,10 @@ export default function Navbar() {
           {navItems.map((item, i) => (
             <Link
               key={item.key}
-              href={item.href || `/${item.key === "usecases" ? "use-cases" : item.key}`}
+              href={
+                item.href ||
+                `/${item.key === "usecases" ? "use-cases" : item.key}`
+              }
               onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3 py-2.5 text-[14px] text-text-1 transition-all duration-200 hover:bg-grey-0 hover:text-text-0"
               style={{

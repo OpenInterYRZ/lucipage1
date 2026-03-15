@@ -1,55 +1,39 @@
-import { Play } from "lucide-react";
+import Image from "next/image";
+import { ChevronLeft } from "lucide-react";
 
-/* ── mock data ─────────────────────────────── */
-const videos = [
+/* ── FeatureChannels data ─── */
+const memories = [
+  { title: "Brainstorming Session", date: "02/04 15:00", thumbnail: "/hero/lib1.webp" },
+  { title: "Q1 Strategy Review", date: "02/04 15:00", thumbnail: "/hero/lib2.webp" },
+  { title: "Project Phoenix Kickoff", date: "02/04 15:00", thumbnail: "/hero/lib3.webp" },
+  { title: "Marketing Strategy Review", date: "02/04 15:00", thumbnail: "/hero/lib4.webp" },
+  { title: "Quarterly Alignment Meeting", date: "02/04 15:00", thumbnail: "/hero/lib5.webp" },
+  { title: "Project Zenith Review", date: "02/04 15:00", thumbnail: "/hero/lib6.webp" },
+];
+
+/* ── FeatureVideoSearch data ─── */
+const speakerAvatarMap: Record<string, string> = {
+  You: "/hero/h2.webp",
+  Lisa: "/hero/h5.webp",
+};
+
+const transcriptEntries = [
   {
-    title: "Project Alpha Kickoff",
-    date: "Oct 15, 2024",
-    duration: "12:15",
-    tags: ["Action Items", "Decisions", "Team Updates"],
-    hue: 24,
+    speaker: "You",
+    time: "12:03–12:47",
+    text: "So the main blocker right now is the API rate limit on the analytics endpoint. We're hitting the cap around 2 PM every day when the bulk sync kicks in. I think we either need to batch the requests or negotiate a higher quota before the launch.",
   },
   {
-    title: "Weekly Sync",
-    date: "Oct 22, 2024",
-    duration: "08:29",
-    tags: ["Strategy", "Follow-up"],
-    hue: 262,
-  },
-  {
-    title: "Client Presentation Review",
-    date: "Oct 25, 2024",
-    duration: "23:40",
-    tags: ["Feedback", "Next Steps"],
-    hue: 150,
-  },
-  {
-    title: "Q3 Performance Review",
-    date: "Nov 1, 2024",
-    duration: "19:10",
-    tags: ["Goals", "Achievements"],
-    hue: 210,
+    speaker: "Lisa",
+    time: "12:48–13:15",
+    text: "Agreed. I've already started prototyping a queue-based approach — we buffer the calls and spread them across a 10-minute window instead of firing everything at once. Should cut peak traffic by about 60%. I can have a PR up by Thursday.",
   },
 ];
 
-const bookmarks = [
-  { label: "Adopt microservice arch", time: "10:15", dot: "#8B5CF6" },
-  { label: "Move launch to Q2", time: "25:40", dot: "#E8622C" },
-  { label: "Marketing budget +30%", time: "32:10", dot: "#3B82F6" },
-  { label: "Assign eng resources", time: "45:05", dot: "#22C55E" },
-];
-
-const actionItems = [
-  { text: "Draft architecture RFC", owner: "Li Ming", done: true },
-  { text: "Update launch timeline", owner: "Wang Lei", done: true },
-  { text: "Review marketing spend", owner: "You", done: false },
-];
-
-/* ── component ─────────────────────────────── */
 export default function VideoMemoryCard() {
   return (
     <div className="flex flex-col md:flex-row-reverse md:items-end gap-6 md:gap-10">
-      {/* ─── Left: Title + Desc (no box) ─── */}
+      {/* ─── Text ─── */}
       <div className="flex w-full md:w-[400px] md:shrink-0 flex-col justify-end gap-4 pb-0 md:pb-6">
         <h3 className="text-[28px] font-bold leading-tight text-text-0">
           Video Understanding Memory
@@ -61,159 +45,83 @@ export default function VideoMemoryCard() {
         </p>
       </div>
 
-      {/* ─── Right: Mockup with background image ─── */}
-      <div
-        className="flex flex-1 items-end justify-end overflow-hidden rounded-[20px] p-5 md:p-10"
-        style={{
-          backgroundImage: "url(/pb.webp)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          className="flex overflow-hidden rounded-tl-xl"
-          style={{
-            backgroundColor: "#F5F5F5",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
-            width: "100%",
-          }}
-        >
-          {/* ── Video Library Panel ── */}
-          <div className="flex flex-1 flex-col gap-4 bg-white p-5">
-            <span className="text-lg font-bold text-[#1A1A2E]">
-              Video Library
-            </span>
-            <div className="grid grid-cols-2 gap-3">
-              {videos.map((v, i) => (
-                <div key={i} className="flex flex-col gap-1.5">
-                  {/* Placeholder thumbnail */}
-                  <div
-                    className="relative aspect-video overflow-hidden rounded-lg"
-                    style={{
-                      background: `linear-gradient(135deg, hsl(${v.hue} 30% 85%) 0%, hsl(${v.hue} 20% 75%) 100%)`,
-                    }}
-                  >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 shadow-sm">
-                        <Play className="h-3.5 w-3.5 fill-[#1A1A2E] text-[#1A1A2E]" />
-                      </div>
-                    </div>
-                    <span className="absolute bottom-1.5 right-1.5 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-medium text-white">
-                      {v.duration}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-0.5 px-0.5">
-                    <span className="truncate text-xs font-semibold text-[#1A1A2E]">
-                      {v.title}
-                    </span>
-                    <span className="text-[10px] text-[#9CA3AF]">{v.date}</span>
-                    <div className="mt-0.5 flex flex-wrap gap-1">
-                      {v.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded px-1.5 py-px text-[9px] font-medium"
-                          style={{
-                            backgroundColor: "#F3F4F6",
-                            color: "#6B7280",
-                          }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+      {/* ─── Visual: Two cards stacked with z-index ─── */}
+      <div className="relative flex-1 overflow-hidden rounded-3xl aspect-[4/3]">
+        <img
+          src="/landscape/lan3.webp"
+          alt=""
+          className="absolute inset-0 size-full object-cover"
+        />
+
+        {/* Back card: Transcript UI (z-20, front, bottom-right) */}
+        <div className="absolute z-20 bottom-4 right-4 md:bottom-6 md:right-6 w-[65%] overflow-hidden rounded-2xl bg-white shadow-xl">
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-neutral-100 px-4 py-3">
+            <div className="flex items-center gap-3">
+              <ChevronLeft className="size-4 text-neutral-400" />
+              <div>
+                <h4 className="text-xs font-semibold text-neutral-900">
+                  Q2 Launch Sync — Engineering
+                </h4>
+                <p className="text-[10px] text-neutral-400">12:00–12:32 pm</p>
+              </div>
             </div>
           </div>
 
-          {/* ── Insight Panel ── */}
-          <div
-            className="hidden md:flex w-[240px] shrink-0 flex-col bg-white"
-            style={{ borderLeft: "1px solid #E8E8E8" }}
-          >
-            {/* Title */}
-            <div className="px-4 pt-4 pb-3">
-              <span className="text-[13px] font-semibold text-[#1A1A2E]">
-                Project Alpha Kickoff
-              </span>
-              <p className="mt-1 text-[10px] text-[#9CA3AF]">
-                45 min · Oct 15, 2024
-              </p>
-            </div>
-            <div className="h-px w-full bg-[#F0F0F0]" />
+          {/* Tabs */}
+          <div className="flex border-b border-neutral-100 px-4">
+            <button className="border-b-2 border-orange-500 px-2 py-2 text-xs font-medium text-neutral-900">
+              Transcription
+            </button>
+            <button className="px-2 py-2 text-xs text-neutral-400">
+              Summary
+            </button>
+          </div>
 
-            {/* TL;DR */}
-            <div className="flex flex-col gap-1.5 px-4 py-3">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#9CA3AF]">
-                TL;DR
-              </span>
-              <p className="text-[11px] leading-[1.6] text-[#374151]">
-                Agreed on microservice architecture. Launch moved to Q2.
-                Marketing budget increased 30%. Li Ming owns eng resourcing.
-              </p>
-            </div>
-            <div className="h-px w-full bg-[#F0F0F0]" />
-
-            {/* Bookmarks */}
-            <div className="flex flex-col gap-1.5 px-4 py-3">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#9CA3AF]">
-                Bookmarks
-              </span>
-              <div className="flex flex-col gap-1.5">
-                {bookmarks.map((b) => (
-                  <div key={b.label} className="flex items-start gap-2">
-                    <div
-                      className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full"
-                      style={{ backgroundColor: b.dot }}
-                    />
-                    <div className="flex flex-1 items-baseline justify-between gap-1">
-                      <span className="text-[11px] text-[#374151]">
-                        {b.label}
-                      </span>
-                      <span className="shrink-0 text-[9px] tabular-nums text-[#B0B0B8]">
-                        {b.time}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+          {/* Transcript entries */}
+          <div className="flex flex-col divide-y divide-neutral-100 px-4">
+            {transcriptEntries.map((entry, i) => (
+              <div key={i} className="py-3">
+                <div className="mb-1.5 flex items-center gap-2">
+                  <img
+                    src={speakerAvatarMap[entry.speaker] || "/hero/h2.webp"}
+                    alt={entry.speaker}
+                    className="size-5 rounded-full object-cover"
+                  />
+                  <span className="text-[10px] font-semibold text-neutral-800">
+                    {entry.speaker}
+                  </span>
+                  <span className="text-[10px] text-neutral-400">{entry.time}</span>
+                </div>
+                <p className="text-[10px] leading-relaxed text-neutral-600 line-clamp-2">
+                  {entry.text}
+                </p>
               </div>
-            </div>
-            <div className="h-px w-full bg-[#F0F0F0]" />
+            ))}
+          </div>
+        </div>
 
-            {/* Action Items */}
-            <div className="flex flex-col gap-1.5 px-4 py-3">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-[#9CA3AF]">
-                Action items
-              </span>
-              <div className="flex flex-col gap-1.5">
-                {actionItems.map((a) => (
-                  <div key={a.text} className="flex items-start gap-2">
-                    <div
-                      className={`mt-[3px] flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border ${
-                        a.done
-                          ? "border-[#22C55E] bg-[#22C55E]"
-                          : "border-[#D1D5DB] bg-white"
-                      }`}
-                    >
-                      {a.done && (
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                          <path d="M1.5 4L3.2 5.7L6.5 2.3" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      )}
-                    </div>
-                    <div className="flex flex-col">
-                      <span className={`text-[11px] ${a.done ? "text-[#9CA3AF] line-through" : "text-[#374151]"}`}>
-                        {a.text}
-                      </span>
-                      <span className="text-[9px] text-[#B0B0B8]">
-                        {a.owner}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+        {/* Back card: Video Library (z-10, behind, top-left) */}
+        <div className="absolute z-10 top-4 left-4 md:top-6 md:left-6 w-[65%] rounded-2xl bg-white p-4 shadow-lg">
+          <h4 className="text-sm font-semibold text-neutral-900 mb-3">
+            Memories
+          </h4>
+          <div className="grid grid-cols-3 gap-2">
+            {memories.map((m, i) => (
+              <div key={i}>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-neutral-100">
+                  <img
+                    src={m.thumbnail}
+                    alt={m.title}
+                    className="size-full object-cover"
+                  />
+                </div>
+                <p className="mt-1 text-[10px] font-medium text-neutral-800 leading-tight line-clamp-1">
+                  {m.title}
+                </p>
+                <p className="text-[9px] text-neutral-400">{m.date}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

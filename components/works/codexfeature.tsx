@@ -1,3 +1,4 @@
+import MeetingContextCard from "./MeetingContextCard";
 import MemoryChatCard from "./MemoryChatCard";
 import VideoMemoryCard from "./VideoMemoryCard";
 import RecordToExecuteCard from "./RecordToExecuteCard";
@@ -22,10 +23,10 @@ export default function CodexFeature() {
 
         {/* ─── Feature Cards ─── */}
         <div className="flex flex-col gap-16 md:gap-32">
+          <MeetingContextCard />
           <VideoMemoryCard />
-          <RecordToExecuteCard />
-          <WhereYouAreCard />
           <SkillsCard />
+          <WhereYouAreCard />
         </div>
       </div>
     </section>

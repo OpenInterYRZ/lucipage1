@@ -1,12 +1,12 @@
 import { Upload, MoreVertical } from "lucide-react";
 
 const skills = [
+  { name: "Video Understanding", desc: "Analyze and extract insights from any video — transcribe, summarize, and identify key moments automatically", on: true, icon: "/memorieslogo.svg" },
   { name: "Meeting Summarizer", desc: "Auto-extract key decisions, action items, and follow-ups from any meeting recording", on: true },
   { name: "Email Drafter", desc: "Generate context-aware email replies based on your communication style and history", on: true },
   { name: "Daily Briefing", desc: "Compile a morning overview of your calendar, pending tasks, and important updates", on: true },
   { name: "Contract Reviewer", desc: "Highlight key clauses, risks, and obligations in legal documents automatically", on: false },
   { name: "Expense Tracker", desc: "Capture receipts from photos and conversations, auto-categorize spending", on: true },
-  { name: "Travel Planner", desc: "Book flights, hotels, and build itineraries from a single conversation", on: true },
 ];
 
 export default function SkillsCard() {
@@ -59,6 +59,9 @@ export default function SkillsCard() {
                 key={skill.name}
                 className="relative flex items-center gap-4 border-t border-[#F0F0F0] px-6 py-4"
               >
+                {skill.icon && (
+                  <img src={skill.icon} alt={skill.name} className="h-5 w-auto shrink-0" />
+                )}
                 <div className="flex flex-1 flex-col gap-0.5 overflow-hidden">
                   <span className="text-[13px] font-medium text-[#1A1A2E]">
                     {skill.name}

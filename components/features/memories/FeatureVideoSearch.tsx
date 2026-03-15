@@ -25,11 +25,11 @@ export default function FeatureVideoSearch() {
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-20 md:grid-cols-2 md:gap-20 md:py-16">
       {/* Text — left */}
-      <div>
+      <div className="flex flex-col items-center text-center">
         <h2 className="text-xl font-medium md:text-4xl lg:text-5xl">
           Turn video into understandable information
         </h2>
-        <p className="mt-5 max-w-lg text-base leading-relaxed text-text-1 md:text-lg">
+        <p className="mt-5 max-w-lg text-center text-base leading-relaxed text-text-1 md:text-lg">
           Automatically transcribe video content and generate concise summaries.
           Catch the key points without rewatching from the start — reduce the
           cost of understanding by extracting what matters.
@@ -37,7 +37,7 @@ export default function FeatureVideoSearch() {
       </div>
 
       {/* Visual — right: Transcript UI */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl p-5 md:p-6">
         <Image
           src="/landscape/lan7.webp"
           alt=""
@@ -45,7 +45,7 @@ export default function FeatureVideoSearch() {
           className="object-cover"
         />
 
-        <div className="relative z-10 m-5 md:m-6 overflow-hidden rounded-2xl bg-white shadow-lg">
+        <div className="relative z-10 w-full max-w-full overflow-hidden rounded-2xl bg-white shadow-lg">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-neutral-100 px-4 py-3">
             <div className="flex items-center gap-3">

@@ -6,32 +6,32 @@ const memories = [
   {
     title: "Brainstorming Session",
     date: "02/04 15:00",
-    thumbnail: "/landscape/lan3.webp",
+    thumbnail: "/hero/lib1.webp",
   },
   {
     title: "Q1 Strategy Review",
     date: "02/04 15:00",
-    thumbnail: "/landscape/lan5.webp",
+    thumbnail: "/hero/lib2.webp",
   },
   {
     title: "Project Phoenix Kickoff",
     date: "02/04 15:00",
-    thumbnail: "/landscape/lan7.webp",
+    thumbnail: "/hero/lib3.webp",
   },
   {
     title: "Marketing Strategy Review",
     date: "02/04 15:00",
-    thumbnail: "/landscape/lan8.webp",
+    thumbnail: "/hero/lib4.webp",
   },
   {
     title: "Quarterly Alignment Meeting",
     date: "02/04 15:00",
-    thumbnail: "/landscape/lan10.webp",
+    thumbnail: "/hero/lib5.webp",
   },
   {
     title: "Project Zenith Review",
     date: "02/04 15:00",
-    thumbnail: "/landscape/lan11.webp",
+    thumbnail: "/hero/lib6.webp",
   },
 ];
 
@@ -49,13 +49,13 @@ export default function FeatureChannels() {
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-20 md:grid-cols-2 md:gap-20 md:py-16">
       {/* Visual — left: Video library grid with landscape background */}
-      <div className="relative overflow-hidden rounded-3xl aspect-[4/3]">
+      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl p-5 md:p-6">
         <img
           src="/landscape/lan3.webp"
           alt=""
           className="absolute inset-0 size-full object-cover"
         />
-        <div className="relative z-10 m-5 md:m-6 rounded-2xl bg-white p-5 shadow-lg">
+        <div className="relative z-10 w-full max-w-full rounded-2xl bg-white p-5 shadow-lg">
           <h3 className="text-lg font-semibold text-neutral-900 mb-4">
             Memories
           </h3>
@@ -80,11 +80,11 @@ export default function FeatureChannels() {
       </div>
 
       {/* Text — right */}
-      <div>
+      <div className="flex flex-col items-center text-center">
         <h2 className="text-xl font-medium md:text-4xl lg:text-5xl">
           Centralize your video memories
         </h2>
-        <p className="mt-5 max-w-lg text-base leading-relaxed text-text-1 md:text-lg">
+        <p className="mt-5 max-w-lg text-center text-base leading-relaxed text-text-1 md:text-lg">
           Bring scattered videos into one unified library. Organize by topic,
           project, person, or meeting — no more digging through local folders or
           chat histories to find what you need.

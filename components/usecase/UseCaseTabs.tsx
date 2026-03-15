@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface UseCaseAgent {
-  icon: string;
   label: string;
 }
 
@@ -29,10 +28,10 @@ const TABS: UseCaseTab[] = [
     description:
       "Never lose track of what was discussed or who owns what. LUCI captures meeting context, follows up on action items, and keeps your team accountable — automatically.",
     agents: [
-      { icon: "📋", label: "Meeting Summary Agent" },
-      { icon: "✅", label: "Action Item Tracker" },
-      { icon: "🔔", label: "Follow-up Reminder Agent" },
-      { icon: "📊", label: "Team Progress Agent" },
+      { label: "Meeting Summary Agent" },
+      { label: "Action Item Tracker" },
+      { label: "Follow-up Reminder Agent" },
+      { label: "Team Progress Agent" },
     ],
     cta: "Start managing smarter",
     image: "/usecase-manage/mana.webp",
@@ -41,14 +40,14 @@ const TABS: UseCaseTab[] = [
     id: "knowledge",
     label: "Knowledge Workers",
     href: "/use-cases/knowledge-workers",
-    title: "Learning notes, video understanding, knowledge base",
+    title: "Learning notes,require video understanding",
     description:
       "Turn hours of video into structured notes in seconds. LUCI watches, understands, and organizes knowledge so you can learn faster and recall anything instantly.",
     agents: [
-      { icon: "🎬", label: "Video Understanding Agent" },
-      { icon: "📝", label: "Smart Notes Agent" },
-      { icon: "🧠", label: "Knowledge Base Builder" },
-      { icon: "🔍", label: "Semantic Search Agent" },
+      { label: "Video Understanding Agent" },
+      { label: "Smart Notes Agent" },
+      { label: "Knowledge Base Builder" },
+      { label: "Semantic Search Agent" },
     ],
     cta: "Build your knowledge base",
     image: "/usecases/konw/Knowledgewor.webp",
@@ -61,10 +60,10 @@ const TABS: UseCaseTab[] = [
     description:
       "Ideas are fleeting — LUCI catches them all. From shower thoughts to structured outlines, build a living second brain that grows with your creative process.",
     agents: [
-      { icon: "💡", label: "Idea Capture Agent" },
-      { icon: "🗂️", label: "Second Brain Organizer" },
-      { icon: "✍️", label: "Creative Workflow Agent" },
-      { icon: "🔗", label: "Idea Connection Agent" },
+      { label: "Idea Capture Agent" },
+      { label: "Second Brain Organizer" },
+      { label: "Creative Workflow Agent" },
+      { label: "Idea Connection Agent" },
     ],
     cta: "Start capturing ideas",
     image: "/usecases/creator/CreatorHero.webp",
@@ -77,10 +76,10 @@ const TABS: UseCaseTab[] = [
     description:
       "When you wear every hat, context-switching kills momentum. LUCI remembers every client detail, keeps your small team in sync, and makes sure nothing falls through the cracks.",
     agents: [
-      { icon: "🤝", label: "Client Context Agent" },
-      { icon: "📈", label: "Team Alignment Agent" },
-      { icon: "⚡", label: "Quick Recap Agent" },
-      { icon: "🎯", label: "Priority Focus Agent" },
+      { label: "Client Context Agent" },
+      { label: "Team Alignment Agent" },
+      { label: "Quick Recap Agent" },
+      { label: "Priority Focus Agent" },
     ],
     cta: "Keep your team aligned",
     image: "/usecases/konw/knowhero.webp",
@@ -109,8 +108,8 @@ export default function UseCaseTabs() {
   const tab = TABS[activeIndex];
 
   return (
-    <section className="w-full bg-web-bg-0 py-20 md:py-28">
-      <div className="mx-auto max-w-[1200px] px-6 sm:px-12">
+    <section className="relative w-full py-20 md:py-28 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 sm:px-12">
         {/* Header */}
         <div className="mb-14 flex flex-col items-center gap-4 text-center">
           <h2 className="text-3xl md:text-5xl font-semibold text-text-0 leading-tight">
@@ -123,7 +122,7 @@ export default function UseCaseTabs() {
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center justify-center gap-3 mb-10">
+        <div className="flex items-center justify-center gap-3 mb-10 flex-wrap">
           {TABS.map((t, i) => {
             const isActive = i === activeIndex;
             return (
@@ -132,8 +131,8 @@ export default function UseCaseTabs() {
                 onClick={() => handleTabClick(i)}
                 className={`relative rounded-full min-w-[140px] px-6 py-2.5 text-sm font-medium transition-all cursor-pointer ${
                   isActive
-                    ? "bg-orange-400 text-white shadow-md"
-                    : "bg-grey-1 text-text-2 border border-grey-2 hover:border-grey-3"
+                    ? "bg-orange-400 text-text-0 shadow-md"
+                    : "text-text-2 bg-bg-2 hover:bg-text-2/25 backdrop-blur-md"
                 }`}
               >
                 {t.label}
@@ -142,8 +141,8 @@ export default function UseCaseTabs() {
           })}
         </div>
 
-        {/* Content Card */}
-        <div className="relative w-full rounded-3xl overflow-hidden bg-grey-0 border border-grey-1">
+        {/* Content Card — white background, left text + right image */}
+        <div className="relative w-full rounded-3xl overflow-hidden bg-bg-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={tab.id}
@@ -151,25 +150,15 @@ export default function UseCaseTabs() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative min-h-[480px]"
+              className="grid grid-cols-1 md:grid-cols-2 min-h-[480px]"
             >
-              {/* Background image */}
-              <img
-                src={tab.image}
-                alt={tab.title}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              {/* Gradient overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-              {/* Text content */}
-              <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-12 gap-6 max-w-2xl">
+              {/* Left — Text content */}
+              <div className="flex flex-col justify-center gap-6 p-8 md:p-12">
                 <div>
-                  <h3 className="text-2xl md:text-3xl font-semibold text-white mb-3">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-text-0 mb-3 leading-snug">
                     {tab.title}
                   </h3>
-                  <p className="text-sm md:text-base text-white/75 leading-relaxed">
+                  <p className="text-sm md:text-base text-text-2 leading-relaxed">
                     {tab.description}
                   </p>
                 </div>
@@ -179,9 +168,8 @@ export default function UseCaseTabs() {
                   {tab.agents.map((agent) => (
                     <div
                       key={agent.label}
-                      className="flex items-center gap-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 px-4 py-2.5 text-sm text-white/85"
+                      className="flex items-center gap-2.5 rounded-full bg-gray-50 px-4 py-2.5 text-sm text-gray-700"
                     >
-                      <span className="text-base shrink-0">{agent.icon}</span>
                       <span className="truncate">{agent.label}</span>
                     </div>
                   ))}
@@ -190,7 +178,7 @@ export default function UseCaseTabs() {
                 {/* CTA */}
                 <Link
                   href={tab.href}
-                  className="inline-flex items-center gap-2 w-fit rounded-full bg-white text-grey-9 px-5 py-2.5 text-sm font-medium hover:bg-white/90 transition-colors"
+                  className="inline-flex items-center gap-2 w-fit rounded-full bg-gray-900 text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 transition-colors"
                 >
                   {tab.cta}
                   <svg
@@ -209,6 +197,15 @@ export default function UseCaseTabs() {
                     />
                   </svg>
                 </Link>
+              </div>
+
+              {/* Right — Image */}
+              <div className="relative min-h-[300px] md:min-h-0">
+                <img
+                  src={tab.image}
+                  alt={tab.title}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
               </div>
             </motion.div>
           </AnimatePresence>

@@ -20,12 +20,22 @@ export function AssistantNameTime({
   time?: string;
 }) {
   return (
-    <div className="flex items-baseline gap-1.5">
+    <div className="flex items-center gap-1.5">
       <span
         className="font-bold text-text-0"
         style={{ fontSize: "var(--phone-chat-fs)" }}
       >
         {name}
+      </span>
+      <span
+        className="inline-flex items-center rounded-full px-1.5 py-px font-semibold text-white"
+        style={{
+          fontSize: "calc(var(--phone-chat-fs) - 4px)",
+          background: "linear-gradient(135deg, #FF8C00 0%, #FFa030 100%)",
+          lineHeight: 1.4,
+        }}
+      >
+        AI&nbsp;Assistant
       </span>
       <span
         className="text-text-2"

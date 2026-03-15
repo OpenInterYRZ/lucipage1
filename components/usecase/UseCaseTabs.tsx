@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -91,32 +91,15 @@ const TAB_DURATION = 5000;
 
 export default function UseCaseTabs() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const startTimeRef = useRef(Date.now());
 
-  const startTimer = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    startTimeRef.current = Date.now();
-    setProgress(0);
-
-    intervalRef.current = setInterval(() => {
-      const elapsed = Date.now() - startTimeRef.current;
-      const pct = Math.min(elapsed / TAB_DURATION, 1);
-      setProgress(pct);
-
-      if (pct >= 1) {
-        setActiveIndex((prev) => (prev + 1) % TABS.length);
-      }
-    }, 30);
+  const advanceTab = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % TABS.length);
   }, []);
 
   useEffect(() => {
-    startTimer();
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [activeIndex, startTimer]);
+    const timer = setTimeout(advanceTab, TAB_DURATION);
+    return () => clearTimeout(timer);
+  }, [activeIndex, advanceTab]);
 
   const handleTabClick = (index: number) => {
     if (index === activeIndex) return;
@@ -147,26 +130,13 @@ export default function UseCaseTabs() {
               <button
                 key={t.id}
                 onClick={() => handleTabClick(i)}
-                className="relative rounded-full min-w-[160px] px-8 py-2.5 text-sm font-medium overflow-hidden bg-grey-1 text-text-2 border border-grey-2 hover:border-grey-3 transition-colors"
+                className={`relative rounded-full min-w-[140px] px-6 py-2.5 text-sm font-medium transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-orange-400 text-white shadow-md"
+                    : "bg-grey-1 text-text-2 border border-grey-2 hover:border-grey-3"
+                }`}
               >
-                {/* Black fill progress */}
-                <motion.span
-                  className="absolute inset-0 rounded-full bg-grey-9"
-                  style={{ transformOrigin: "left" }}
-                  animate={{ scaleX: isActive ? progress : 0 }}
-                  transition={{ duration: 0.03, ease: "linear" }}
-                />
-                {/* Black text (base layer) */}
-                <span className="relative z-10 text-text-0">{t.label}</span>
-                {/* White text (clipped to progress) */}
-                <span
-                  className="absolute inset-0 z-20 flex items-center justify-center text-white"
-                  style={{
-                    clipPath: `inset(0 ${100 - (isActive ? progress * 100 : 0)}% 0 0)`,
-                  }}
-                >
-                  {t.label}
-                </span>
+                {t.label}
               </button>
             );
           })}

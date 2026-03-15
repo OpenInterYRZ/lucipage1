@@ -67,140 +67,55 @@ const CHAT_MESSAGES: ChatMessage[] = [
 ];
 
 function ChatVisual() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(CHAT_MESSAGES.length);
-  const timerRef = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const clearTimers = useCallback(() => {
-    timerRef.current.forEach(clearTimeout);
-    timerRef.current = [];
-  }, []);
-
-  useEffect(() => {
-    if (isHovered) {
-      // Reset and replay — first message stays visible
-      clearTimers();
-      setVisibleCount(1);
-
-      CHAT_MESSAGES.slice(1).forEach((_, i) => {
-        const t = setTimeout(
-          () => {
-            setVisibleCount(i + 2);
-          },
-          400 + i * 350,
-        );
-        timerRef.current.push(t);
-      });
-    } else {
-      // Show all immediately
-      clearTimers();
-      setVisibleCount(CHAT_MESSAGES.length);
-    }
-    return clearTimers;
-  }, [isHovered, clearTimers]);
-
-  // Auto-scroll to bottom when messages appear
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [visibleCount]);
-
   return (
-    <div
-      className="flex flex-col h-[340px]"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative flex flex-col h-[340px] overflow-hidden">
+      <img
+        src="/landscape/lan8.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
       {/* Messages area */}
-      <div
-        ref={scrollRef}
-        className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-2.5 scroll-smooth"
-      >
-        {CHAT_MESSAGES.slice(0, visibleCount).map((msg, i) => (
-          <div
-            key={i}
-            className="transition-all duration-300 ease-out"
-            style={{
-              opacity: isHovered ? 1 : 1,
-              transform:
-                isHovered && i === visibleCount - 1
-                  ? "translateY(0)"
-                  : "translateY(0)",
-              animation:
-                isHovered && i > 0 && i === visibleCount - 1
-                  ? "chatFadeIn 0.3s ease-out"
-                  : "none",
-            }}
-          >
-            {msg.type === "user" ? (
-              <div className="flex justify-end">
-                <div className="bg-[#ff8c42]/80 text-white text-[12px] leading-relaxed rounded-2xl rounded-tr-sm px-3 py-2 max-w-[85%]">
-                  {msg.text}
+      <div className="relative z-10 mx-3 mt-4 mb-3 p-2 rounded-xl bg-bg-0 flex-1 min-h-0 overflow-hidden">
+        <div className="overflow-y-auto h-full flex flex-col gap-2.5 px-2 py-1">
+          {CHAT_MESSAGES.map((msg, i) => (
+            <div key={i}>
+              {msg.type === "user" ? (
+                <div className="flex justify-end">
+                  <div className="bg-grey-1 text-text-0 text-[12px] leading-relaxed rounded-2xl rounded-tr-sm px-3 py-2 max-w-[85%]">
+                    {msg.text}
+                  </div>
                 </div>
-              </div>
-            ) : msg.hasImages ? (
-              <div className="flex gap-2">
-                {[
-                  "/hero/me1.webp",
-                  "/hero/me2.webp",
-                  "/hero/me3.webp",
-                ].map((src, n) => (
-                  <img
-                    key={n}
-                    src={src}
-                    alt=""
-                    className="w-[72px] h-[72px] rounded-lg object-cover flex-shrink-0"
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="text-[12px] leading-relaxed text-[#c8c8d0]">
-                {msg.isTaskResult ? (
-                  <span>
-                    {msg.text}{" "}
-                    <span className="text-[#ff8c42] underline cursor-pointer">
-                      {msg.linkText}
+              ) : msg.hasImages ? (
+                <div className="flex gap-2">
+                  {["/hero/me1.webp", "/hero/me2.webp", "/hero/me3.webp"].map(
+                    (src, n) => (
+                      <img
+                        key={n}
+                        src={src}
+                        alt=""
+                        className="w-[72px] h-[72px] rounded-lg object-cover flex-shrink-0"
+                      />
+                    ),
+                  )}
+                </div>
+              ) : (
+                <div className="text-[12px] leading-relaxed text-text-2">
+                  {msg.isTaskResult ? (
+                    <span>
+                      {msg.text}{" "}
+                      <span className="text-[#ff8c42] underline cursor-pointer">
+                        {msg.linkText}
+                      </span>
                     </span>
-                  </span>
-                ) : (
-                  msg.text
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Input bar */}
-      <div className="px-3 pb-3 pt-1">
-        <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#16161a] px-3 py-2">
-          <button className="w-6 h-6 rounded-full border border-white/15 flex items-center justify-center flex-shrink-0">
-            <Plus className="w-3 h-3 text-white/40" />
-          </button>
-          <span className="text-[12px] text-white/25 flex-1">
-            Press Fn to ask
-          </span>
-          <button className="w-6 h-6 rounded-full bg-[#ff5c00] flex items-center justify-center flex-shrink-0">
-            <ArrowUp className="w-3 h-3 text-white" />
-          </button>
+                  ) : (
+                    msg.text
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* Keyframe animation */}
-      <style jsx>{`
-        @keyframes chatFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 }
@@ -242,67 +157,50 @@ const MEMORY_LINES = [
 ];
 
 function VideoMemoryVisual() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div
-      className="relative h-[340px] overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Video thumbnails grid */}
-      <div className="px-4 pt-4 grid grid-cols-2 gap-2.5">
-        {VIDEO_THUMBS.map((v) => (
-          <div
-            key={v.label}
-            className="relative rounded-lg overflow-hidden aspect-video"
-          >
-            <img src={v.img} alt={v.label} className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/40" />
-            {/* Play icon */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-7 h-7 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
-                <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-white/70 ml-0.5" />
-              </div>
-            </div>
-            {/* Duration badge */}
-            <span className="absolute bottom-1 right-1.5 text-[9px] text-white/70 bg-black/50 px-1 rounded">
-              {v.time}
-            </span>
-            {/* Title */}
-            <span className="absolute bottom-1 left-1.5 text-[9px] text-white/60 font-medium">
-              {v.label}
-            </span>
-          </div>
-        ))}
-      </div>
+    <div className="relative h-[340px] overflow-hidden">
+      <img
+        src="/landscape/lan12.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
 
-      {/* Memory document — slides up from bottom on hover */}
-      <div
-        className="absolute left-3 right-3 bottom-3 rounded-xl border border-white/10 overflow-hidden transition-transform duration-500 ease-out"
-        style={{
-          backgroundColor: "#16161a",
-          transform: isHovered
-            ? "translateY(0)"
-            : "translateY(calc(100% + 12px))",
-        }}
-      >
-        {/* Document header bar */}
-        <div className="flex items-center gap-1.5 px-3 py-1.5 border-b border-white/5">
-          <span className="w-2 h-2 rounded-full bg-[#ff5c00]/60" />
-          <span className="text-[10px] text-white/40 font-medium">
-            memory.md
+      {/* Single video card — back layer */}
+      <div className="absolute z-10 left-4 right-4 top-4 rounded-xl bg-bg-0 p-2">
+        <div className="relative rounded-lg overflow-hidden aspect-video">
+          <img
+            src={VIDEO_THUMBS[0].img}
+            alt={VIDEO_THUMBS[0].label}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-bg-0/20" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
+              <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-white/70 ml-0.5" />
+            </div>
+          </div>
+          <span className="absolute bottom-1.5 right-2 text-[10px] text-white/70 bg-black/50 px-1.5 rounded">
+            {VIDEO_THUMBS[0].time}
+          </span>
+          <span className="absolute bottom-1.5 left-2 text-[10px] text-white/60 font-medium">
+            {VIDEO_THUMBS[0].label}
           </span>
         </div>
+      </div>
 
-        {/* Document content */}
-        <div className="px-3.5 py-3 max-h-[220px] overflow-y-auto dark-scroll">
+      {/* Memory document — front layer, overlapping */}
+      <div className="absolute z-20 left-6 right-6 bottom-3 rounded-xl bg-bg-0 p-3 shadow-lg max-h-[180px] overflow-y-auto">
+        <div className="flex items-center gap-1.5 pb-1.5 border-b border-grey-1">
+          <span className="w-2 h-2 rounded-full bg-[#ff5c00]/60" />
+          <span className="text-[10px] text-text-3 font-medium">memory.md</span>
+        </div>
+        <div className="pt-2">
           {MEMORY_LINES.map((line, i) => {
             if (line.type === "title") {
               return (
                 <p
                   key={i}
-                  className="text-white/90 text-[13px] font-bold leading-tight mb-0.5"
+                  className="text-text-0 text-[13px] font-bold leading-tight mb-0.5"
                 >
                   {line.text}
                 </p>
@@ -310,7 +208,7 @@ function VideoMemoryVisual() {
             }
             if (line.type === "meta") {
               return (
-                <p key={i} className="text-white/30 text-[10px] mb-2.5">
+                <p key={i} className="text-text-3 text-[10px] mb-2.5">
                   {line.text}
                 </p>
               );
@@ -319,7 +217,7 @@ function VideoMemoryVisual() {
               return (
                 <p
                   key={i}
-                  className="text-[#ff8c42]/80 text-[11px] font-semibold mt-2 mb-1"
+                  className="text-[#ff8c42] text-[11px] font-semibold mt-2 mb-1"
                 >
                   {line.text}
                 </p>
@@ -328,7 +226,7 @@ function VideoMemoryVisual() {
             return (
               <p
                 key={i}
-                className="text-white/55 text-[11px] leading-relaxed pl-2 before:content-['•'] before:mr-1.5 before:text-white/25"
+                className="text-text-2 text-[11px] leading-relaxed pl-2 before:content-['•'] before:mr-1.5 before:text-text-3"
               >
                 {line.text}
               </p>
@@ -433,32 +331,172 @@ function ConnectorsVisual() {
   );
 }
 
+/* ─── See Visual (Card 4) ────────────────────────────── */
+
+function SeeVisual() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className="relative h-[340px] flex items-center justify-center p-4 overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Background landscape */}
+      <img
+        src="/landscape/lan14.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Floating recorder window */}
+      <div className="relative z-10 w-full max-w-[320px] bg-bg-0 rounded-2xl overflow-hidden border border-grey-2 transition-transform duration-500 ease-out">
+        {/* Top bar: close / logo / cloud + more */}
+        <div className="flex items-center justify-between px-4 pt-4 pb-2">
+          {/* Close button */}
+          <button className="w-7 h-7 rounded-full bg-grey-1 flex items-center justify-center">
+            <svg
+              className="w-3 h-3 text-text-3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* LUCI logo */}
+          <img src="/lucilogo-black.svg" alt="LUCI" className="h-5" />
+
+          {/* Right icons */}
+          <div className="flex items-center gap-1.5">
+            <button className="w-7 h-7 rounded-full bg-grey-1 flex items-center justify-center">
+              <svg
+                className="w-3.5 h-3.5 text-text-3"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                viewBox="0 0 24 24"
+              >
+                <path d="M2 15s3-6 10-6 10 6 10 6-3 6-10 6S2 15 2 15z" />
+                <circle cx="12" cy="15" r="3" />
+              </svg>
+            </button>
+            <button className="w-7 h-7 rounded-full bg-grey-1 flex items-center justify-center">
+              <svg
+                className="w-3.5 h-3.5 text-text-3"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="12" cy="5" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="12" cy="19" r="2" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Source selectors: Screen + Microphone */}
+        <div className="px-4 pb-3 flex gap-3">
+          {/* Screen selector */}
+          <div className="flex-1 flex items-center rounded-xl bg-grey-1   overflow-hidden">
+            <div className="flex-1 flex items-center justify-center py-3">
+              <svg
+                className="w-5 h-5 text-text-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                viewBox="0 0 24 24"
+              >
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+              </svg>
+            </div>
+            <div className="w-px h-6 bg-grey-2" />
+            <button className="px-2.5 py-3 flex items-center justify-center">
+              <svg
+                className="w-3 h-3 text-text-3"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Microphone selector */}
+          <div className="flex-1 flex items-center rounded-xl bg-grey-1 overflow-hidden">
+            <div className="flex-1 flex items-center justify-center py-3">
+              <svg
+                className="w-5 h-5 text-text-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                viewBox="0 0 24 24"
+              >
+                <rect x="9" y="1" width="6" height="12" rx="3" />
+                <path d="M5 10a7 7 0 0014 0M12 17v4M8 21h8" />
+              </svg>
+            </div>
+            <div className="w-px h-6 bg-grey-2" />
+            <button className="px-2.5 py-3 flex items-center justify-center">
+              <svg
+                className="w-3 h-3 text-text-3"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Start Recording button */}
+        <div className="px-4 pb-5">
+          <button className="w-full py-3 rounded-full text-bg-0 font-semibold text-[14px] bg-primary transition-all duration-300">
+            Start Recording
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Default data ───────────────────────────────────── */
 
 const DEFAULT_CARDS: FeatureCard[] = [
+  // {
+  //   id: "connectors",
+  //   title: "Connectors",
+  //   subtitle:
+  //     "Link all your work apps — Slack, Notion, Gmail, Zoom, and more. LUCI pulls context from everywhere.",
+  //   ctaText: "Learn more",
+  //   visual: <ConnectorsVisual />,
+  // },
   {
-    id: "chat",
-    title: "Chat",
+    id: "see",
+    title: "See",
     subtitle:
-      "Natural conversation interface. Chat with LUCI to manage tasks, ask questions, and get things done.",
-    ctaText: "Learn more",
-    visual: <ChatVisual />,
+      "LUCI observes your screen, meetings, and workflows in real time — building a living understanding of what you do and how you work.",
+    visual: <SeeVisual />,
   },
   {
-    id: "video-memory",
-    title: "Personal video memory indexing",
+    id: "remember",
+    title: "Remember",
     subtitle:
-      "LUCI watches your meetings and calls, then distills key decisions, action items, and context into memory.",
-    ctaText: "Learn more",
+      "Every conversation, decision, and key moment is automatically captured and organized into searchable memory — so nothing slips through the cracks.",
     visual: <VideoMemoryVisual />,
   },
   {
-    id: "connectors",
-    title: "Connectors",
+    id: "act",
+    title: "Act",
     subtitle:
-      "Link all your work apps — Slack, Notion, Gmail, Zoom, and more. LUCI pulls context from everywhere.",
-    ctaText: "Learn more",
-    visual: <ConnectorsVisual />,
+      "Ask LUCI to draft emails, prep for meetings, or manage tasks — it takes action based on everything it has seen and remembered.",
+    visual: <ChatVisual />,
   },
 ];
 
@@ -472,37 +510,33 @@ export default function FeatureCards({
   cards = DEFAULT_CARDS,
 }: FeatureCardsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+    <div className="flex flex-col md:flex-row gap-4 w-full">
       {cards.map((card) => (
         <div
           key={card.id}
-          className="flex flex-col rounded-2xl border border-white/10 overflow-hidden"
-          style={{ backgroundColor: "#18181b" }}
+          className="flex-1 min-w-0 flex flex-col rounded-2xl border border-white/10 overflow-hidden bg-bg-0"
         >
+          {/* Visual / demo area */}
+          <div className="rounded-t-2xl overflow-hidden bg-bg-0">
+            {card.visual ?? (
+              <div className="h-48 flex items-center justify-center text-white/10 text-sm">
+                Placeholder
+              </div>
+            )}
+          </div>
+
           {/* Text area */}
-          <div className="px-6 pt-6 pb-4">
-            <h3 className="text-white text-lg font-bold leading-tight mb-1.5">
+          <div className="p-6">
+            <h3 className="text-text-1 text-lg font-bold leading-tight mb-1.5">
               {card.title}
             </h3>
-            <p className="text-[#8a8a9a] text-sm leading-relaxed mb-3">
+            <p className="text-text-2 text-sm leading-relaxed mb-3">
               {card.subtitle}
             </p>
             {card.ctaText && (
               <span className="text-[#ff5c00] text-sm font-medium cursor-pointer hover:underline">
                 {card.ctaText} &rarr;
               </span>
-            )}
-          </div>
-
-          {/* Visual / demo area */}
-          <div
-            className="flex-1 mt-auto rounded-b-2xl overflow-hidden"
-            style={{ backgroundColor: "#1f1f23" }}
-          >
-            {card.visual ?? (
-              <div className="h-48 flex items-center justify-center text-white/10 text-sm">
-                Placeholder
-              </div>
             )}
           </div>
         </div>

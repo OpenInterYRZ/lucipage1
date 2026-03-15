@@ -140,6 +140,7 @@ const aboutItems: NavItemData[] = [
 const navItems = [
   { label: "Use Cases", key: "usecases" },
   { label: "Features", key: "features" },
+  { label: "Pricing", key: "pricing", href: "/pricing" },
   { label: "Resources", key: "resources" },
   { label: "About", key: "about" },
 ];
@@ -271,20 +272,34 @@ export default function Navbar() {
         {/* Desktop Center Nav — pill style, 居中 */}
         <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:flex items-center">
           <div className="flex items-center gap-1">
-            {navItems.map((item) => (
-              <button
-                key={item.key}
-                onMouseEnter={() => openDropdown(item.key)}
-                onMouseLeave={scheduleClose}
-                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
-                  activeDropdown === item.key
-                    ? "bg-grey-1 text-text-0"
-                    : "text-text-1 hover:text-text-0"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) =>
+              item.href ? (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  onMouseEnter={() => {
+                    if (closeTimer.current) clearTimeout(closeTimer.current);
+                    setActiveDropdown(null);
+                  }}
+                  className="rounded-full px-4 py-1.5 text-sm font-medium text-text-1 hover:text-text-0 transition-all duration-200"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.key}
+                  onMouseEnter={() => openDropdown(item.key)}
+                  onMouseLeave={scheduleClose}
+                  className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200 ${
+                    activeDropdown === item.key
+                      ? "bg-grey-1 text-text-0"
+                      : "text-text-1 hover:text-text-0"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ),
+            )}
           </div>
         </div>
 
@@ -497,7 +512,7 @@ export default function Navbar() {
           {navItems.map((item, i) => (
             <Link
               key={item.key}
-              href={`/${item.key === "usecases" ? "use-cases" : item.key}`}
+              href={item.href || `/${item.key === "usecases" ? "use-cases" : item.key}`}
               onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3 py-2.5 text-[14px] text-text-1 transition-all duration-200 hover:bg-grey-0 hover:text-text-0"
               style={{

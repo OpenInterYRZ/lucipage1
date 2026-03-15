@@ -22,7 +22,6 @@ export default function CodexFeature() {
 
         {/* ─── Feature Cards ─── */}
         <div className="flex flex-col gap-16 md:gap-32">
-          <MemoryChatCard />
           <VideoMemoryCard />
           <RecordToExecuteCard />
           <WhereYouAreCard />

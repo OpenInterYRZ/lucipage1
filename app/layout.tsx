@@ -38,7 +38,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <SmoothScroll>{children}</SmoothScroll>
+          {children}
           <ChatWidget />
         </ThemeProvider>
         <Analytics />

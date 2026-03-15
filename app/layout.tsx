@@ -39,7 +39,7 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
-          <ChatWidget />
+          {/* <ChatWidget /> */}
         </ThemeProvider>
         <Analytics />
       </body>

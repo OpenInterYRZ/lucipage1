@@ -4,7 +4,10 @@ import { AssistantAvatar, AssistantNameTime } from "./AssistantAvatar";
 
 const TODOS = [
   { text: "QA smart search before v2.4 release", source: "from Product Demo" },
-  { text: "Review London office relocation packages", source: "from All-Hands" },
+  {
+    text: "Review London office relocation packages",
+    source: "from All-Hands",
+  },
   { text: "Implement 4-tab mobile navigation", source: "from Design Review" },
 ];
 
@@ -13,7 +16,7 @@ export function TodoListBubble() {
     <div className="flex w-full items-start gap-2 justify-start">
       <AssistantAvatar />
       <div
-        className="flex max-w-[270px] flex-col"
+        className="flex max-w-120 flex-col"
         style={{
           fontFamily: "Manrope, sans-serif",
         }}

@@ -18,7 +18,7 @@ export function MemoryNotification({
   if (collapsed) {
     return (
       <div
-        className="flex w-full items-center gap-1.5 rounded-2xl px-[18px] py-3"
+        className="flex w-full max-w-120 items-center gap-1.5 rounded-2xl px-[18px] py-3"
         style={{
           background: "#FFFFFF",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
@@ -40,7 +40,7 @@ export function MemoryNotification({
 
   return (
     <div
-      className="flex w-full flex-col gap-3 rounded-2xl p-[16px_18px]"
+      className="flex w-full max-w-100 flex-col ml-10 gap-3 rounded-2xl p-[16px_18px]"
       style={{
         background: "#FFFFFF",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",

@@ -40,58 +40,48 @@ export function MeetingSummaryCard() {
             {/* Product Demo Recording */}
             <div className="flex flex-col gap-0.5">
               <p>
-                <span className="font-bold">Product Demo Recording</span> · 45 min
+                <span className="font-bold">Product Demo</span> · 45 min
               </p>
               <p className="text-text-1">
-                - v2.4 features demoed: smart search, batch exports, onboarding
-                flow
-              </p>
-              <p className="text-text-1">
-                - Smart search uses semantic matching for natural language queries
+                - v2.4: smart search, batch exports, new onboarding
               </p>
               <p>
                 <span className="font-medium" style={{ color: "#FF8C00" }}>
                   Action:
                 </span>{" "}
-                QA team verify smart search before release
+                QA verify smart search before release
               </p>
             </div>
 
             {/* Weekly All-Hands */}
             <div className="flex flex-col gap-0.5">
               <p>
-                <span className="font-bold">Weekly All-Hands</span> · 58 min
+                <span className="font-bold">All-Hands</span> · 58 min
               </p>
               <p className="text-text-1">
-                - Series B closed — $42M led by Accel, 30-month runway
-              </p>
-              <p className="text-text-1">
-                - MAU crossed 50K, 8 enterprise deals in late-stage
+                - Series B closed — $42M, 30-month runway
               </p>
               <p>
                 <span className="font-medium" style={{ color: "#FF8C00" }}>
                   Action:
                 </span>{" "}
-                London office opening next month — check relocation packages
+                London office next month — check relocation info
               </p>
             </div>
 
             {/* Design Review — Mobile */}
             <div className="flex flex-col gap-0.5">
               <p>
-                <span className="font-bold">Design Review — Mobile</span> · 37 min
+                <span className="font-bold">Design Review</span> · 37 min
               </p>
               <p className="text-text-1">
-                - Bottom tab bar reduced from 5 to 4 tabs with adaptive icons
-              </p>
-              <p className="text-text-1">
-                - Settings screen moved to grouped list pattern
+                - Tab bar reduced to 4 tabs, adaptive icons
               </p>
               <p>
                 <span className="font-medium" style={{ color: "#FF8C00" }}>
                   Action:
                 </span>{" "}
-                @iOS Dev implement 4-tab navigation update
+                @iOS implement 4-tab navigation
               </p>
             </div>
           </div>

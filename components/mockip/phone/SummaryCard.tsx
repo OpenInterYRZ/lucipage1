@@ -26,7 +26,7 @@ export function SummaryCard() {
         </span>
 
         <table
-          className="w-full border-collapse"
+          className="w-full max-w-80 border-collapse"
           style={{ fontSize: "var(--phone-chat-fs)" }}
         >
           <thead>
@@ -44,10 +44,7 @@ export function SummaryCard() {
           </thead>
           <tbody>
             {metrics.map((m) => (
-              <tr
-                key={m.label}
-                style={{ borderBottom: "1px solid #f5f5f5" }}
-              >
+              <tr key={m.label} style={{ borderBottom: "1px solid #f5f5f5" }}>
                 <td className="py-[3px] text-[#555]">{m.label}</td>
                 <td className="py-[3px] text-right font-semibold text-[#333]">
                   {m.value}

@@ -11,13 +11,13 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
-    id: 'ai-researcher',
-    title: 'AI Researcher',
-    type: 'Full time',
-    department: 'Research',
-    location: 'Worldwide',
-    releaseDate: '2026-01-19',
-    releaseLabel: 'Release time: ',
+    id: "ai-researcher",
+    title: "AI Researcher",
+    type: "Full time",
+    department: "Research",
+    location: "Worldwide",
+    releaseDate: "2026-01-19",
+    releaseLabel: "Release time: ",
     md: `#### Job Description
 
 We are seeking a highly motivated AI/ML Researcher to join our research team and help build next-generation intelligent systems. You will work on cutting-edge problems across computer vision, vision-language models (VLM), multi-modal large language models (MMLLM), and efficient machine learning.
@@ -45,13 +45,13 @@ You will lead and/or contribute to research in one or more of the following area
 - Experience building data pipelines and evaluation systems for multi-modal models`,
   },
   {
-    id: 'product-manager',
-    title: 'Product Manager',
-    type: 'Full time',
-    department: 'Product',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
+    id: "product-manager",
+    title: "Product Manager",
+    type: "Full time",
+    department: "Product",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
     md: `#### Job Description
 
 We are seeking a Product Manager / Product Lead with international vision, an engineering background, and strong product thinking. You will be responsible for building differentiated products from scratch (0 → 1), exploring innovative directions, and transforming advanced AI technologies into impactful user experiences.
@@ -77,13 +77,13 @@ We are seeking a Product Manager / Product Lead with international vision, an en
 - Strong product intuition and data-driven thinking, able to independently execute research, design, and delivery`,
   },
   {
-    id: 'product-growth',
-    title: 'Product Growth',
-    type: 'Full time',
-    department: 'Product',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
+    id: "product-growth",
+    title: "Product Growth",
+    type: "Full time",
+    department: "Product",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
     md: `#### Job Description
 
 We are looking for a strategic and hands-on Product Growth professional to drive user acquisition and brand expansion in overseas markets. Using data-driven methodologies, you will design and execute growth strategies across acquisition, activation, retention, conversion, and repurchase to fuel international expansion.
@@ -104,13 +104,13 @@ We are looking for a strategic and hands-on Product Growth professional to drive
 - Excellent cross-functional communication and project management skills`,
   },
   {
-    id: 'sales-associate',
-    title: 'Sales Associate',
-    type: 'Full time',
-    department: 'Business',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
+    id: "sales-associate",
+    title: "Sales Associate",
+    type: "Full time",
+    department: "Business",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
     md: `#### Job Description
 
 We're seeking a proactive, versatile Sales Associate to join Memories.ai's founding team. You will be involved in the full customer lifecycle, from lead generation to customer success, supporting the commercialization of our AI Infra products.
@@ -133,13 +133,13 @@ We're seeking a proactive, versatile Sales Associate to join Memories.ai's found
 - Excellent English communication skills`,
   },
   {
-    id: 'frontend-engineer',
-    title: 'Frontend Engineer',
-    type: 'Full time',
-    department: 'Engineer',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
+    id: "frontend-engineer",
+    title: "Frontend Engineer",
+    type: "Full time",
+    department: "Engineer",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
     md: `#### Job Description
 
 Join our AI product development team as an experienced Frontend Engineer. You will design and implement user interfaces that interact with AI models.
@@ -165,14 +165,18 @@ Join our AI product development team as an experienced Frontend Engineer. You wi
 - Good English proficiency`,
   },
   {
-    id: 'backend-software-engineer',
-    title: 'Backend Software Engineer',
-    type: 'Full time',
-    department: 'Engineer',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
-    md: `#### Responsibilities
+    id: "backend-software-engineer",
+    title: "Backend Software Engineer",
+    type: "Full time",
+    department: "Engineer",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
+    md: `
+
+We are looking for a Backend Software Engineer to join our team and help build the next-generation intelligent systems. You will be responsible for designing and implementing the backend systems for the AI products.
+    
+    #### Responsibilities
 - Architect and develop high-concurrency distributed systems; lead Java/Go tech stack selection and implementation
 - Build microservices with Spring Boot/Cloud and high-performance backend services with Gin/Go-zero
 - Optimize performance and resolve distributed system challenges
@@ -190,14 +194,18 @@ Join our AI product development team as an experienced Frontend Engineer. You wi
 - Familiar with RPC frameworks, distributed DB optimization, open-source contributions`,
   },
   {
-    id: 'test-engineer',
-    title: 'Test Engineer',
-    type: 'Full time',
-    department: 'Engineer',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
-    md: `#### Responsibilities
+    id: "test-engineer",
+    title: "Test Engineer",
+    type: "Full time",
+    department: "Engineer",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
+    md: `
+
+We're looking for a Test Engineer to join our team and help build the next-generation intelligent systems. You will be responsible for designing and implementing the test systems for the AI products.
+
+#### Responsibilities
 - Review requirements, design test plans and cases, ensure functional correctness
 - Perform functional and API testing, leverage AI tools for test automation
 - Develop and maintain automated test scripts (Python preferred)
@@ -218,13 +226,13 @@ Join our AI product development team as an experienced Frontend Engineer. You wi
 - K8s proficiency, AI product testing experience`,
   },
   {
-    id: 'ai-research-intern',
-    title: 'AI Research Intern',
-    type: 'Internship',
-    department: 'Research',
-    location: 'Worldwide',
-    releaseDate: '2025-09-09',
-    releaseLabel: 'Release time: ',
+    id: "ai-research-intern",
+    title: "AI Research Intern",
+    type: "Internship",
+    department: "Research",
+    location: "Worldwide",
+    releaseDate: "2025-09-09",
+    releaseLabel: "Release time: ",
     md: `#### Job Description
 
 We're looking for a motivated AI/ML Intern to join our research team, tackling challenges in audio processing, computer vision, and efficient ML. You'll contribute to developing next-generation intelligent systems.

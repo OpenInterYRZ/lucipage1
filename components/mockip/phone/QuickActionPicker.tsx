@@ -39,7 +39,7 @@ export function QuickActionPicker({ onDismiss }: QuickActionPickerProps) {
       style={{ fontFamily: "Manrope, sans-serif" }}
     >
       <div
-        className="flex flex-col overflow-hidden rounded-xl"
+        className="flex flex-col overflow-hidden rounded-xl max-w-90 ml-10"
         style={{
           background: "#FFFFFF",
           border: "1px solid #E5E5E5",

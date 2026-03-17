@@ -1,10 +1,10 @@
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import Link from 'next/link';
-import { jobs, getJobById } from '@/data/careers';
-import Footer from '@/components/Footer';
-import Sidebar from './Sidebar';
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import Link from "next/link";
+import { jobs, getJobById } from "@/data/careers";
+import Footer from "@/components/Footer";
+import Sidebar from "./Sidebar";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -31,10 +31,10 @@ export default async function CareerDetailPage({ params }: Props) {
 
   if (!job) notFound();
 
-  const postedDate = new Date(job.releaseDate).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+  const postedDate = new Date(job.releaseDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 
   return (
@@ -50,7 +50,7 @@ export default async function CareerDetailPage({ params }: Props) {
         <div className="mt-8 flex flex-col lg:flex-row gap-12">
           {/* JD Content */}
           <div className="flex-1 min-w-0">
-            <h1 className="text-3xl md:text-4xl font-bold font-['DM_Serif_Display',serif] text-grey-9">
+            <h1 className="text-3xl md:text-4xl font-bold text-grey-9">
               {job.title}
             </h1>
             <div className="mt-8 max-w-none [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-grey-9 [&_h4]:mt-8 [&_h4]:mb-3 [&_p]:text-grey-6 [&_p]:leading-relaxed [&_p]:mb-4 [&_li]:text-grey-6 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ul]:mb-4 [&_strong]:text-grey-8">

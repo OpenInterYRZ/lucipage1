@@ -3,7 +3,7 @@
 export function AssistantAvatar() {
   return (
     <div
-      className="shrink-0 overflow-hidden rounded-[6px]"
+      className="shrink-0 overflow-hidden rounded-[6px] border-2 border-[#FFa030]"
       style={{ width: 36, height: 36 }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -28,10 +28,9 @@ export function AssistantNameTime({
         {name}
       </span>
       <span
-        className="inline-flex items-center rounded-full px-1.5 py-px font-semibold text-white"
+        className="inline-flex items-center rounded-[4px] px-1.5 py-px font-semibold text-[#FFa030] bg-[#fdf2e5]"
         style={{
           fontSize: "calc(var(--phone-chat-fs) - 4px)",
-          background: "linear-gradient(135deg, #FF8C00 0%, #FFa030 100%)",
           lineHeight: 1.4,
         }}
       >

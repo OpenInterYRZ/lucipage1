@@ -51,7 +51,7 @@
   --gradient-red: #ff2c36;
 
   /* Phone chat UI tokens */
-  --phone-chat-fs: 15px;
+  --phone-chat-fs: 14px;
   --phone-chat-fs-sm: 12px;
 
   /* PainPoint window tokens — light mode */
@@ -615,4 +615,29 @@
 }
 .dark-scroll:hover::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
+}
+
+/* Hero CTA — larger, more prominent download button */
+.hero-cta {
+  padding: 14px 32px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.hero-cta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  opacity: 1 !important;
+}
+.hero-cta:active {
+  transform: scale(0.98);
+}
+.hero-cta span {
+  font-size: 15px !important;
+}
+.hero-cta svg {
+  width: 22px !important;
+  height: 22px !important;
 }

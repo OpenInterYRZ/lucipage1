@@ -12,12 +12,13 @@ export default function CodexFeature() {
         {/* ─── Header ─── */}
         <div className="flex flex-col gap-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-semibold leading-[1.15] text-center text-text-0">
-            Your AI-Powered Second Brain for Work
+            Your AI-Powered Second Brain — Personalized, Proactive,
+            Productive
           </h2>
           <p className="text-base text-text-2 max-w-2xl mx-auto text-center leading-relaxed">
-            LUCI integrates fragmented information into structured memory,
-            turning every conversation and every video into reusable knowledge
-            assets.
+            LUCI turns every meeting, video, and conversation into searchable
+            memory and actionable tasks — so you never lose context or forget
+            a follow-up.
           </p>
         </div>
 

@@ -72,8 +72,9 @@ export const CapHero = () => {
 
         {/* 2. 副标题 */}
         <p className="text-text-1  text-base leading-[1.6] text-left max-w-[680px] mt-4 mb-8">
-          Meet LUCI — your AI assistant that connects your tools, <br />
-          understands your work, and gets things done.
+          LUCI is an all-purpose AI agent that understands your videos,
+          <br />
+          remembers your context, and automates your workflow.
         </p>
 
         {/* 3. 按钮组 */}

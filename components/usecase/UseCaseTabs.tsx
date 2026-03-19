@@ -87,11 +87,12 @@ export default function UseCaseTabs() {
         {/* Header */}
         <div className="mb-14 flex flex-col items-center gap-4 text-center">
           <h2 className="text-4xl md:text-5xl font-semibold text-text-0 leading-[1.15]">
-            Built for elites
+            One AI agent, built for elites
           </h2>
           <p className="text-base text-text-2 max-w-3xl">
-            From founders to investors, sales leaders to founders — LUCI adapts
-            to how you work.
+            Whether you&apos;re a founder, investor, or sales leader —
+            LUCI&apos;s AI agents adapt to your workflow and automate the tasks
+            that slow you down.
           </p>
         </div>
 

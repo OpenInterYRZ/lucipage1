@@ -65,9 +65,6 @@ export default function WhereYouAreCard() {
 
       {/* ─── Right: Title + Desc ─── */}
       <div className="flex w-full flex-1 md:shrink-0 flex-col gap-4 pb-0 md:pb-6">
-        <span className="text-[11px] font-semibold tracking-widest text-emerald-600 uppercase">
-          Platform
-        </span>
         <h3 className="text-2xl md:text-3xl font-semibold leading-tight text-text-0">
           Where You Already Are
         </h3>

@@ -49,10 +49,15 @@ export default function ProductShowcaseDesktop() {
     [activeTab],
   );
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     function handleResize() {
-      const d = window.innerWidth < 768 ? MOBILE_DEFAULTS : DESKTOP_DEFAULTS;
-      setWindowState(d.window);
+      const isMobile = window.innerWidth < 768;
+      const d = isMobile ? MOBILE_DEFAULTS : DESKTOP_DEFAULTS;
+      const containerWidth = containerRef.current?.offsetWidth ?? 1280;
+      const centeredX = Math.max(0, Math.round((containerWidth - d.window.width) / 2));
+      setWindowState({ ...d.window, x: centeredX, y: d.window.y });
       setContainerHeight(d.container);
     }
     handleResize();
@@ -60,7 +65,6 @@ export default function ProductShowcaseDesktop() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
 
   const tabs: { id: TabId; label: string; icon: React.ReactNode }[] = [

@@ -7,10 +7,11 @@ export default function ChaosToClarity() {
       <div className="max-w-[1300px] mx-auto flex flex-col items-center gap-20 px-5 ">
         <div className="text-center">
           <h2 className="text-text-0 text-4xl md:text-5xl font-semibold leading-[1.15]">
-            How LUCI works
+            How LUCI automates your workflow
           </h2>
           <p className="text-text-2 text-base md:text-lg mt-4 max-w-xl mx-auto">
-            Three simple steps to see, remember, and act.
+            From video understanding to automated execution — in three
+            steps.
           </p>
         </div>
         <div className="w-full">

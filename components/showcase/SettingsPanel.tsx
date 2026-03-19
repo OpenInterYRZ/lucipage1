@@ -314,11 +314,7 @@ export default function SettingsPanel() {
             {/* ── Core AI Integration — flat, no card wrapper ── */}
             <div className="border-l-2 border-pro pl-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pro">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M13 3L4 14h7l-1 7 9-11h-7l1-7Z" fill="#fff" />
-                  </svg>
-                </div>
+                <img src="/memorieslogo.svg" alt="Memories" className="h-5 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-bold text-text-0">

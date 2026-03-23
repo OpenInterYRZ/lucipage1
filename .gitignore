@@ -27,6 +27,7 @@ _bmad-output/
 # misc
 .DS_Store
 *.pem
+*.pen
 _bmad/
 .agents/
 .claude/

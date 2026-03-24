@@ -48,13 +48,22 @@ export default function DownloadPage() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.22 }}
-          className="mt-10"
+          className="mt-10 flex w-full max-w-[280px] flex-col items-stretch gap-3"
         >
           <GradientButton
             href="/download/success"
             text="Download for Mac"
             download
+            className="w-full text-center"
           />
+          <a
+            href="https://discord.gg/dAqjfdJaQz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center rounded-lg border border-grey-1 bg-grey-0 py-2.5 text-center text-sm font-semibold text-text-0 transition-colors hover:bg-grey-1"
+          >
+            Join Discord
+          </a>
         </motion.div>
 
         {/* System requirements */}

@@ -82,16 +82,32 @@ function DiscordIcon() {
 }
 
 const socialLinks = [
-  { icon: <XIcon />, href: "https://x.com", label: "X" },
+  {
+    icon: <LinkedInIcon />,
+    href: "https://www.linkedin.com/company/memoriesai/",
+    label: "LinkedIn",
+  },
+  { icon: <XIcon />, href: "https://x.com/memories_ai", label: "X" },
+  {
+    icon: <YouTubeIcon />,
+    href: "https://www.youtube.com/@memories_dot_ai",
+    label: "YouTube",
+  },
+  {
+    icon: <TikTokIcon />,
+    href: "https://www.tiktok.com/@memories_dot_ai",
+    label: "TikTok",
+  },
   {
     icon: <InstagramIcon />,
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/memories_dot_ai",
     label: "Instagram",
   },
-  { icon: <YouTubeIcon />, href: "https://youtube.com", label: "YouTube" },
-  { icon: <TikTokIcon />, href: "https://tiktok.com", label: "TikTok" },
-  { icon: <LinkedInIcon />, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: <DiscordIcon />, href: "https://discord.com", label: "Discord" },
+  {
+    icon: <DiscordIcon />,
+    href: "https://discord.gg/dAqjfdJaQz",
+    label: "Discord",
+  },
 ];
 
 export default function Footer() {

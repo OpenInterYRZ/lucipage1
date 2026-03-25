@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import BlogCard from '@/components/blog/BlogCard';
+import Link from "next/link";
+import BlogCard from "@/components/blog/BlogCard";
 
-import type { BlogPost } from '@/lib/blog';
+import type { BlogPost } from "@/lib/blog";
 
 interface BlogPageProps {
   posts: BlogPost[];
@@ -31,8 +31,10 @@ export default function BlogPage({
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-20">
         <header className="mb-12">
           <p className="text-sm text-text-2 mb-2">News &amp; Blogs</p>
-          <h1 className="font-serif font-normal text-5xl sm:text-6xl lg:text-7xl text-text-0">
-            {currentPage === 1 ? 'Latest Articles' : `Articles — Page ${currentPage}`}
+          <h1 className="font-semibold text-5xl text-text-0">
+            {currentPage === 1
+              ? "Latest Articles"
+              : `Articles — Page ${currentPage}`}
           </h1>
         </header>
 
@@ -69,11 +71,14 @@ export default function BlogPage({
                   <span>by {featuredPost.frontmatter.author}</span>
                   <span className="text-white/40">—</span>
                   <time dateTime={featuredPost.frontmatter.date}>
-                    {new Date(featuredPost.frontmatter.date).toLocaleDateString('en', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
+                    {new Date(featuredPost.frontmatter.date).toLocaleDateString(
+                      "en",
+                      {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      },
+                    )}
                   </time>
                 </div>
               </div>
@@ -130,8 +135,8 @@ export default function BlogPage({
                 href={`?page=${p}`}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   p === currentPage
-                    ? 'bg-primary text-white'
-                    : 'bg-grey-0 text-text-1 hover:bg-grey-1'
+                    ? "bg-primary text-white"
+                    : "bg-grey-0 text-text-1 hover:bg-grey-1"
                 }`}
               >
                 {p}
@@ -140,7 +145,6 @@ export default function BlogPage({
           </nav>
         )}
       </section>
-
     </>
   );
 }

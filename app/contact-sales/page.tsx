@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { supabase } from "@/lib/supabase";
 
 const teamSizes = ["1–10", "11–50", "51–200", "201–1000", "1000+"] as const;
 
@@ -27,6 +28,7 @@ const initial: FormData = {
 export default function ContactSalesPage() {
   const [form, setForm] = useState<FormData>(initial);
   const [submitted, setSubmitted] = useState(false);
+  const [showCalendly, setShowCalendly] = useState(false);
   const [sending, setSending] = useState(false);
 
   function set(field: keyof FormData) {
@@ -40,10 +42,23 @@ export default function ContactSalesPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setSending(true);
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 800));
+    const { error } = await supabase.from("contact_sales").insert({
+      first_name: form.firstName,
+      last_name: form.lastName,
+      work_email: form.workEmail,
+      company: form.company,
+      job_title: form.jobTitle || null,
+      team_size: form.teamSize || null,
+      message: form.message || null,
+    });
     setSending(false);
+    if (error) {
+      console.error("contact_sales insert error:", error);
+      alert("Something went wrong. Please try again.");
+      return;
+    }
     setSubmitted(true);
+    setShowCalendly(true);
   }
 
   return (
@@ -51,7 +66,7 @@ export default function ContactSalesPage() {
       <section className="mx-auto max-w-6xl px-6 pt-36 pb-24">
         {/* Header */}
         <div className="mb-16 max-w-2xl">
-          <p className="text-sm font-semibold tracking-[3px] text-[var(--primary)] uppercase">
+          <p className="text-sm font-semibold tracking-[3px] text-primary uppercase">
             Contact Sales
           </p>
           <h1 className="mt-4 text-4xl md:text-5xl font-semibold text-text-0 leading-[1.15]">
@@ -91,6 +106,13 @@ export default function ContactSalesPage() {
                   <strong className="text-grey-8">{form.workEmail}</strong>{" "}
                   within one business day.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setShowCalendly(true)}
+                  className="inline-flex items-center gap-2 rounded-full bg-grey-9 px-7 py-3 text-sm font-semibold text-white transition-all hover:bg-[var(--primary)]"
+                >
+                  Book a meeting
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -242,6 +264,55 @@ export default function ContactSalesPage() {
           </aside>
         </div>
       </section>
+
+      {/* ─── Calendly Modal ─── */}
+      {showCalendly && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          onClick={() => setShowCalendly(false)}
+        >
+          <div
+            className="relative w-full max-w-7xl mx-4 rounded-2xl bg-white shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 py-4 border-b border-grey-1">
+              <div>
+                <h2 className="text-lg font-semibold text-grey-9">
+                  Thanks, {form.firstName}!
+                </h2>
+                <p className="text-sm text-grey-5">
+                  Book a time to chat with our team.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowCalendly(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-grey-4 hover:bg-grey-0 hover:text-grey-7 transition-colors"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <iframe
+              src="https://calendly.com/shawn-shen-memories-ai/30min?embed_domain=memories.ai&embed_type=Inline"
+              width="100%"
+              height="630"
+              frameBorder="0"
+              title="Schedule a meeting"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

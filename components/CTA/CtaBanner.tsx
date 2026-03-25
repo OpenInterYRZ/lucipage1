@@ -12,14 +12,14 @@ export type CtaBannerConfig = {
 const defaultConfig: Required<Omit<CtaBannerConfig, "subtext">> & {
   subtext: string | React.ReactNode;
 } = {
-  heading: "Try LUCI free — your all-purpose AI agent",
+  heading: "Try LUCI now — your personal AI assistant",
   subtext: (
     <>
-      Download LUCI for free and automate your workflow in minutes.
+      Download LUCI now and automate your workflow in minutes.
       <br /> No setup needed — LUCI learns how you work from day one.
     </>
   ),
-  buttonText: "Get LUCI for free",
+  buttonText: "Get LUCI now",
   buttonHref: "#",
 };
 

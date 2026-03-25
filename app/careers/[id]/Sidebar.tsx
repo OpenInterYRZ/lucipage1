@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface SidebarProps {
   department: string;
@@ -23,9 +23,26 @@ export default function Sidebar({
         <MetaField label="Location" value={location} />
         <MetaField label="Posted" value={postedDate} />
 
+        <p className="text-sm leading-relaxed text-grey-6 pt-1">
+          Apply by emailing{" "}
+          <a
+            href="mailto:hr@memories.ai"
+            className="font-medium text-grey-9 underline underline-offset-2 hover:text-grey-8"
+          >
+            hr@memories.ai
+          </a>
+          . Use{" "}
+          <span className="font-medium text-grey-9">
+            [{jobTitle}] + [Your Name]
+          </span>{" "}
+          in the subject line (replace{" "}
+          <span className="whitespace-nowrap">[Your Name]</span> with your
+          name).
+        </p>
+
         <a
-          href={`mailto:hr@luci.ai?subject=Application: ${jobTitle}`}
-          className="block w-full text-center py-3 rounded-lg bg-[var(--primary)] text-white font-semibold hover:opacity-90 transition-opacity mt-6"
+          href={`mailto:hr@memories.ai?subject=${encodeURIComponent(`[${jobTitle}] + [Your Name]`)}`}
+          className="block w-full text-center py-3 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition-opacity mt-2"
         >
           Apply Now
         </a>

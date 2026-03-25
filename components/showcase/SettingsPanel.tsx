@@ -318,11 +318,14 @@ export default function SettingsPanel() {
             {/* ── Core AI Integration — flat, no card wrapper ── */}
             <div className="border-l-2 border-pro pl-4">
               <div className="flex items-center gap-3 mb-2">
-                <img
-                  src="/memorieslogo.svg"
-                  alt="Memories"
-                  className="h-5 shrink-0"
-                />
+                <a
+                  href="https://memories.ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 rounded opacity-90 transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-pro focus-visible:ring-offset-2"
+                >
+                  <img src="/memorieslogo.svg" alt="Memories" className="h-5" />
+                </a>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="rounded-full bg-pro/10 px-2 py-0.5 text-[10px] font-semibold text-pro uppercase tracking-wide">
@@ -337,7 +340,7 @@ export default function SettingsPanel() {
               </p>
               {memoriesConnected && (
                 <p className="text-xs font-medium text-pro mb-2">
-                  Connected as User@gmail.com
+                  Connected as User@mail.com
                 </p>
               )}
               <div className="flex items-center gap-2">

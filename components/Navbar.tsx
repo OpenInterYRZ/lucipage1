@@ -105,8 +105,8 @@ const aboutItems: NavItemData[] = [
 /* ─── Nav items ─── */
 
 const navItems = [
-  { label: "Use Cases", key: "usecases" },
   { label: "Features", key: "features" },
+  { label: "Use Cases", key: "usecases" },
   { label: "Resources", key: "resources" },
   { label: "About", key: "about" },
   { label: "Pricing", key: "pricing", href: "/pricing" },

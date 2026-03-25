@@ -8,20 +8,15 @@ const integrations = [
     icon: "https://cdn.simpleicons.org/notion",
     connected: false,
   },
-  {
-    name: "Memories.ai",
-    icon: "https://cdn.simpleicons.org/memories/F97316",
-    connected: true,
-    email: "UserUser@gmail.com",
-  },
+
   {
     name: "Outlook Mail",
-    icon: "https://cdn.simpleicons.org/microsoftoutlook",
+    icon: "https://cdn.simpleicons.org/maildotru/0078D4",
     connected: false,
   },
   {
     name: "Outlook Calendar",
-    icon: "https://cdn.simpleicons.org/microsoftoutlook/1976D2",
+    icon: "https://cdn.simpleicons.org/googlecalendar/0078D4",
     connected: false,
   },
   {
@@ -49,7 +44,6 @@ function IntegrationCard({ item }: { item: (typeof integrations)[number] }) {
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-medium text-neutral-800">{item.name}</p>
-        {item.email && <p className="text-xs text-neutral-400">{item.email}</p>}
       </div>
       {item.connected ? (
         <button className="shrink-0 rounded-full border border-orange-200 px-4 py-1.5 text-xs font-medium text-orange-500">

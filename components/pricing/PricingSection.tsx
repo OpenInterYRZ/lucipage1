@@ -385,9 +385,6 @@ export default function PricingSection() {
               <button className="rounded-full bg-[#FF6B4A] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(255,107,74,0.3)] transition-all hover:bg-[#ff5a36] hover:shadow-[0_4px_20px_rgba(255,107,74,0.4)] hover:scale-[1.02] active:scale-[0.98]">
                 Start Saving Now
               </button>
-              <button className="rounded-full border border-grey-2 bg-white px-8 py-3.5 text-sm font-semibold text-text-0 transition-colors hover:border-grey-3">
-                ROI Calculator
-              </button>
             </div>
           </div>
         </motion.div>
